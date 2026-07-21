@@ -86,9 +86,104 @@ body{font-family:'Spline Sans Mono',monospace;background:var(--bg);color:var(--c
 }
 @media (prefers-reduced-motion:reduce){.fade{animation:none;opacity:1;transform:none;}}
 :focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
+
+/* ===== ЭКРАНЫ ТЕСТОВ (тема шаблона) ===== */
+:root{--ok:#8FBF9E;--warn:#C6A96B;--bad:#D08B7E;}
+.screen{display:none;}
+.screen.active{display:block;animation:up .6s cubic-bezier(.2,.7,.2,1);}
+#test,#result{max-width:640px;margin:0 auto;padding:6px 22px 70px;min-height:66vh;}
+#test.active,#result.active{display:flex;flex-direction:column;}
+.back-link{background:none;border:none;color:var(--cream-faint);font-family:'Spline Sans Mono';font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:8px 0;align-self:flex-start;transition:color .2s;}
+.back-link:hover{color:var(--cream);}
+.progress-wrap{margin:8px 0 18px;}
+.progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px;}
+.progress-meta .stage{font-family:'Spline Sans Mono';font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+.progress-meta .count{font-family:'Spline Sans Mono';font-size:12px;color:var(--cream-soft);font-variant-numeric:tabular-nums;}
+.progress-bar{height:2px;background:var(--hair);border-radius:2px;overflow:hidden;}
+.progress-bar>i{display:block;height:100%;background:var(--gold);transition:width .3s ease;}
+.trinity-dots{display:flex;gap:6px;margin-top:10px;}
+.trinity-dots i{height:2px;flex:1;background:var(--hair);border-radius:2px;}
+.trinity-dots i.done{background:rgba(198,169,107,.5);}
+.trinity-dots i.cur{background:var(--gold);}
+.q-block{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:40px 0;}
+.q-kicker{font-family:'Spline Sans Mono';font-size:13px;color:var(--cream-soft);margin-bottom:18px;}
+.q-word{font-family:'Fraunces';font-weight:300;font-size:clamp(32px,8vw,52px);line-height:1.05;letter-spacing:-.02em;color:var(--cream);}
+.q-claim{font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(24px,5.5vw,38px);line-height:1.26;letter-spacing:-.01em;color:var(--cream);}
+.q-hint{font-family:'Spline Sans Mono';font-size:13px;color:var(--cream-faint);margin-top:18px;}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.scale button{appearance:none;cursor:pointer;font-family:'Fraunces';font-weight:300;background:var(--bg-2);color:var(--cream);border:1px solid var(--hair);border-radius:5px;height:64px;font-size:24px;transition:all .15s;}
+.scale button:hover{border-color:var(--gold);}
+.scale button.chosen{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+.scale-legend{display:flex;justify-content:space-between;margin-top:12px;}
+.scale-legend span{font-family:'Spline Sans Mono';font-size:11px;letter-spacing:.03em;color:var(--cream-faint);text-transform:uppercase;}
+.verdicts{display:grid;gap:10px;}
+.verdicts button{appearance:none;cursor:pointer;font-family:'Spline Sans Mono';text-align:left;background:var(--bg-2);color:var(--cream);border:1px solid var(--hair);border-radius:5px;padding:17px 18px;font-size:14px;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:14px;transition:all .15s;}
+.verdicts button:hover{border-color:var(--gold);}
+.verdicts button .vk{width:9px;height:9px;border-radius:50%;flex:none;}
+.verdicts button.chosen{border-color:var(--gold);background:rgba(198,169,107,.12);}
+/* результат */
+.result-head{margin:10px 0 22px;}
+#resultEyebrow{font-family:'Spline Sans Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+#resultTitle{font-family:'Fraunces';font-weight:300;font-size:clamp(34px,7vw,52px);letter-spacing:-.02em;line-height:1;color:var(--cream);margin-top:8px;}
+.card{background:var(--bg-2);border:1px solid var(--hair);border-radius:6px;padding:22px;margin-bottom:14px;}
+.eyebrow{font-family:'Spline Sans Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+.verdict-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.verdict-title .badge2{font-family:'Spline Sans Mono';font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);}
+.big-verdict{font-family:'Fraunces';font-weight:300;font-size:clamp(28px,6vw,40px);margin:8px 0;letter-spacing:-.01em;line-height:1.1;color:var(--cream);}
+.verdict-desc{font-family:'Spline Sans Mono';color:var(--cream-soft);font-size:14px;line-height:1.7;}
+.chart-wrap svg{width:100%;height:auto;display:block;}
+.legend-dots{display:flex;gap:18px;justify-content:center;margin-top:10px;}
+.legend-dots span{display:inline-flex;align-items:center;gap:7px;font-family:'Spline Sans Mono';font-size:12px;color:var(--cream-soft);text-transform:uppercase;letter-spacing:.03em;}
+.legend-dots i{width:11px;height:11px;border-radius:50%;display:inline-block;}
+.scores{display:flex;gap:18px;margin-top:16px;}
+.score{flex:1;}
+.score .k{font-family:'Spline Sans Mono';font-size:11px;color:var(--cream-faint);text-transform:uppercase;letter-spacing:.05em;}
+.score .v{font-family:'Fraunces';font-size:28px;font-weight:300;color:var(--cream);font-variant-numeric:tabular-nums;margin-top:2px;}
+.bars{display:grid;gap:14px;margin-top:10px;}
+.bar-row .bar-top{display:flex;justify-content:space-between;margin-bottom:7px;font-family:'Spline Sans Mono';font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--cream);}
+.bar-row .bar-top span{color:var(--cream-soft);font-variant-numeric:tabular-nums;}
+.bar-track{height:6px;background:var(--hair);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;background:var(--gold);transition:width .5s ease;}
+.bar-fill.low{background:#C08A5E;}.bar-fill.mid{background:#C6A96B;}
+.review{display:grid;gap:14px;margin-top:6px;}
+.review-item{display:flex;gap:12px;align-items:flex-start;}
+.review-item .rk{width:8px;height:8px;border-radius:50%;margin-top:8px;flex:none;}
+.review-item .rk.right{background:#8FBF9E;}.review-item .rk.wrong{background:#D08B7E;}
+.review-item .rt{font-family:'Spline Sans Mono';font-size:14px;line-height:1.6;}
+.review-item .rt .claim{color:var(--cream);}
+.review-item .rt .expl{color:var(--cream-soft);font-size:13px;margin-top:3px;}
+.review-item .rt .verd{color:var(--gold);}
+.next-card{background:linear-gradient(160deg,rgba(198,169,107,.15),rgba(237,233,222,.04));border:1px solid rgba(198,169,107,.32);}
+.next-card h3{font-family:'Spline Sans Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.next-card p{font-family:'Fraunces';font-style:italic;font-weight:300;font-size:20px;line-height:1.42;color:var(--cream);}
+.synth-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:6px;}
+.synth-cell{background:var(--bg);border:1px solid var(--hair);border-radius:6px;padding:16px;text-align:center;}
+.synth-cell .sc-name{font-family:'Spline Sans Mono';font-size:11px;color:var(--cream-faint);text-transform:uppercase;letter-spacing:.05em;}
+.synth-cell .sc-val{font-family:'Fraunces';font-weight:300;font-size:22px;margin-top:5px;color:var(--cream);letter-spacing:-.01em;}
+@media(max-width:400px){.synth-grid{grid-template-columns:1fr;}}
+.email-card h3{font-family:'Fraunces';font-weight:300;font-size:26px;color:var(--cream);margin-bottom:8px;letter-spacing:-.01em;}
+.email-card p{font-family:'Spline Sans Mono';color:var(--cream-soft);font-size:13px;line-height:1.6;margin-bottom:16px;}
+.email-form{display:flex;flex-direction:column;gap:10px;}
+.email-form input{font-family:'Spline Sans Mono';font-size:16px;background:var(--bg);color:var(--cream);border:1px solid var(--hair);border-radius:5px;padding:15px 16px;width:100%;}
+.email-form input:focus{outline:none;border-color:var(--gold);}
+.email-note{font-family:'Spline Sans Mono';font-size:12px;margin-top:10px;min-height:16px;}
+.email-note.ok{color:var(--gold);}.email-note.err{color:#D08B7E;}
+.btn{appearance:none;border:none;cursor:pointer;background:var(--gold);color:var(--bg);font-family:'Spline Sans Mono';font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:16px 20px;border-radius:5px;width:100%;min-height:52px;transition:opacity .2s;}
+.btn:hover{opacity:.9;}
+.btn.secondary{background:none;color:var(--cream);border:1px solid var(--hair);}
+.btn.secondary:hover{border-color:var(--gold);}
+.result-actions{display:grid;gap:10px;margin-top:4px;}
+#result footer{margin-top:34px;padding-top:20px;border-top:1px solid var(--hair);display:flex;flex-direction:column;gap:6px;}
+#result footer .fbrand{font-family:'Spline Sans Mono';font-size:12px;color:var(--cream-soft);}
+#result footer .fbrand b{color:var(--gold);}
+#result footer .disclaimer{font-family:'Spline Sans Mono';font-size:11px;color:var(--cream-faint);line-height:1.5;}
+.item{cursor:pointer;}
+.mark{cursor:pointer;}
+
 </style>
 </head>
 <body>
+
 <div class="wrap">
   <div class="top">
     <div class="mark">
@@ -99,7 +194,10 @@ body{font-family:'Spline Sans Mono',monospace;background:var(--bg);color:var(--c
     <div class="center mono"><span class="num">01</span><span data-t="home">Начало</span></div>
     <div class="langs mono"><button data-lang="ru" class="on">RU</button><button data-lang="ro">RO</button><button data-lang="en">EN</button></div>
   </div>
+</div>
 
+<div id="home" class="screen active">
+<div class="wrap">
   <section class="hero">
     <div class="brandbig fade d1">Healthy<span class="w2">Wolk</span></div>
     <div class="tagline mono fade d2" data-t="tag">Тело · Психика · Мир</div>
@@ -114,20 +212,1221 @@ body{font-family:'Spline Sans Mono',monospace;background:var(--bg);color:var(--c
       <div class="mono lbl" data-t="sysLabel">Три системы</div>
       <div class="hint" data-t="sysHint">Выбери одну или пройди всё</div>
     </div>
-    <a href="#" class="item"><div class="idx">01</div><div><h3 data-t="c1t">Тело</h3><p data-t="c1p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <a href="#" class="item"><div class="idx">02</div><div><h3 data-t="c2t">Психика</h3><p data-t="c2p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <a href="#" class="item"><div class="idx">03</div><div><h3 data-t="c3t">Мир</h3><p data-t="c3p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#" class="item" data-test="body"><div class="idx">01</div><div><h3 data-t="c1t">Тело</h3><p data-t="c1p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#" class="item" data-test="psyche"><div class="idx">02</div><div><h3 data-t="c2t">Психика</h3><p data-t="c2p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#" class="item" data-test="world"><div class="idx">03</div><div><h3 data-t="c3t">Мир</h3><p data-t="c3p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <div class="cta"><a href="#"><span class="t" data-t="ctaT">Пройти все три</span><span class="s mono" data-t="ctaS">Тело · Психика · Мир — ~10 минут</span></a></div>
   </section>
 </div>
+</div>
+<section class="screen" id="test">
+  <button class="back-link" id="backBtn" data-i18n="ui.back"></button>
+  <div class="progress-wrap">
+    <div class="progress-meta"><span class="stage" id="stageLabel"></span><span class="count" id="countLabel"></span></div>
+    <div class="progress-bar"><i id="progressFill" style="width:0%"></i></div>
+    <div class="trinity-dots" id="trinityDots" style="display:none"></div>
+  </div>
+  <div class="q-block">
+    <div class="q-kicker" id="qKicker"></div>
+    <div id="qMain"></div>
+    <div class="q-hint" id="qHint"></div>
+  </div>
+  <div id="qInput"></div>
+</section>
+<section class="screen" id="result">
+  <div class="result-head">
+    <div class="eyebrow" id="resultEyebrow"></div>
+    <h2 id="resultTitle"></h2>
+  </div>
+  <div id="resultBody"></div>
+  <div class="card email-card">
+    <h3 data-i18n="ui.emailTitle"></h3>
+    <p data-i18n="ui.emailSub"></p>
+    <form class="email-form" id="emailForm" novalidate>
+      <input type="email" id="emailInput" data-i18n-attr="placeholder:ui.emailPlaceholder" autocomplete="email" inputmode="email">
+      <button class="btn" type="submit" data-i18n="ui.emailBtn"></button>
+    </form>
+    <div class="email-note" id="emailNote"></div>
+  </div>
+  <div class="result-actions"><button class="btn secondary" id="moreBtn" data-i18n="ui.moreTests"></button></div>
+  <footer>
+    <div class="fbrand" data-i18n-html="ui.footerBrand"></div>
+    <div class="disclaimer" data-i18n="ui.disclaimer"></div>
+  </footer>
+</section>
+
+<script>
+
+/* =========================================================================
+   1. TI18N — все строки. ru — источник структуры; ro и en повторяют ключи.
+      Доступ по «пути»: t("ui.heroTitle"), t("body.tips.sleep") и т.д.
+   ========================================================================= */
+const TI18N = {
+
+  /* ============================ РУССКИЙ ============================ */
+  ru: {
+    ui: {
+      eyebrow: "Базовая настройка человека",
+      heroTitle: "Через 5 минут ты поймёшь, что с тобой — <span class='hl'>и что делать дальше</span>.",
+      heroLead: "Не верь на слово. Пройди — и убедись сам. Тело, психика, картина мира — без мусора и без вранья.",
+      thesis: "Все продают баночки, страх и веру. Мы даём настройку и уверенность.",
+
+      trinityLabel: "Святая троица",
+      trinityHint: "Выбери дверь или пройди всё",
+      trinityCta: "Пройти всю троицу",
+      trinityCtaSub: "Тело · Психика · Мир — целиком, ~10 минут",
+
+      back: "← Назад",
+      startOne: "Пройти тест",
+
+      // прогресс
+      count: "{i} из {n}",
+      testOfN: "Тест {k} из {m}",
+
+      // результат
+      resultEyebrowOne: "Результат",
+      resultEyebrowAll: "Твоя базовая настройка",
+      whatNext: "Что делать дальше",
+      moreTests: "К другим тестам",
+      againOne: "Пройти заново",
+
+      // почта
+      emailTitle: "Хочешь разбор глубже — и тело с миром первым?",
+      emailSub: "Оставь почту: пришлём разбор твоего результата и понятные шаги. Без спама, без вранья.",
+      emailPlaceholder: "твоя почта",
+      emailBtn: "Прислать разбор",
+      emailOk: "Готово. Почта сохранена — разбор придёт первым.",
+      emailErr: "Проверь адрес — кажется, опечатка.",
+      emailDup: "Эта почта уже сохранена.",
+
+      footerBrand: "<b>HealthyWolk</b> · базовая настройка человека",
+      disclaimer: "Тесты в познавательных целях, не медицинская диагностика. Спорное мы называем спорным.",
+    },
+
+    // Три двери
+    doors: {
+      body:   { title: "Тело",    tag: "Химия организма",  desc: "Сон, вода, питание, движение. Что реально нужно телу, чтобы работать чётко — и как это проверить, а не гадать." },
+      psyche: { title: "Психика", tag: "Химия эмоций",     desc: "Как работает твоя голова: откуда гнев и подавленность, как понять своё состояние. Тест-квадрант." },
+      world:  { title: "Мир",     tag: "Правда и враньё",  desc: "Как отличать правду от вранья и не дать себя обмануть. Проверь, легко ли тебя провести." },
+    },
+
+    // ТЕСТ ТЕЛА
+    body: {
+      title: "Тест тела",
+      kicker: "Насколько это про тебя?",
+      hint: "1 — совсем не про меня · 5 — точно про меня",
+      scaleLow: "Не про меня",
+      scaleHigh: "Точно про меня",
+      statements: {
+        b_sleep1: "Я сплю 7–8 часов и просыпаюсь отдохнувшим",
+        b_sleep2: "Мой сон глубокий, я редко просыпаюсь среди ночи",
+        b_water1: "Я пью достаточно чистой воды в течение дня",
+        b_water2: "Я слежу за качеством воды, а не пью что попало",
+        b_food1:  "В моём дне достаточно белка (мясо, рыба, яйца, творог)",
+        b_food2:  "Я ем овощи и клетчатку каждый день",
+        b_food3:  "Витамины я беру из еды, а не из баночек",
+        b_move1:  "Я двигаюсь каждый день — хожу или тренируюсь",
+        b_move2:  "Я хотя бы иногда проверяю базовые анализы, а не гадаю",
+      },
+      domains: { sleep: "Сон", water: "Вода", food: "Питание", move: "Движение и анализы" },
+      bands: {
+        high: "Тело настроено",
+        mid:  "База есть, есть куда расти",
+        low:  "Тело просит внимания",
+      },
+      bandDesc: {
+        high: "Основа в порядке. Держи режим и не ломай то, что работает — стабильность важнее рывков.",
+        mid:  "Фундамент заложен, но есть слабое звено. Точечно подтянешь — и почувствуешь разницу.",
+        low:  "Тело сейчас работает не в полную силу. Хорошая новость: базовые вещи чинятся быстрее, чем кажется.",
+      },
+      weakLabel: "Слабое звено",
+      tips: {
+        sleep: "Сон — самый твёрдый блок. Во сне мозг буквально вымывает мусор (бета-амилоид). Целься в глубину и режим, а не только в часы.",
+        water: "Фильтруй и реминерализуй: осмос убирает и вредное, и полезные минералы. А «кальций из воды засоряет сосуды» — миф, выкинь.",
+        food:  "Бери витамины из еды: ~2 киви ≈ суточный витамин C. Белок 0,8–1,2 г/кг, клетчатка 25–38 г. Баночки не нужны.",
+        move:  "Двигайся каждый день и проверяй базовые анализы, а не гадай по ощущениям. Цифры честнее самочувствия.",
+      },
+      nextStep: "Начни с одного слабого звена, не со всего сразу. Одна привычка на 2 недели — и следующий замер покажет сдвиг.",
+    },
+
+    // ТЕСТ ПСИХИКИ (PANAS-квадрант)
+    psyche: {
+      title: "Тест психики",
+      qNow: "Как ты ПРЯМО СЕЙЧАС?",
+      qGeneral: "Как ты В ЦЕЛОМ за последние 2 недели?",
+      stageNow: "Замер 1 из 2 · сейчас",
+      stageGeneral: "Замер 2 из 2 · за 2 недели",
+      hint: "Насколько это про тебя в этот момент?",
+      scaleLow: "Совсем нет",
+      scaleHigh: "Очень сильно",
+      words: {
+        p_interested: "Заинтересован", p_enthusiastic: "Воодушевлён", p_strong: "Полон сил",
+        p_energetic: "Энергичен", p_proud: "Горд", p_attentive: "Внимателен",
+        p_inspired: "Вдохновлён", p_determined: "Решителен", p_alert: "Бодр", p_active: "Активен",
+        n_distressed: "Подавлен", n_upset: "Расстроен", n_guilty: "Виноват", n_scared: "Испуган",
+        n_hostile: "Враждебен", n_irritable: "Раздражён", n_ashamed: "Пристыжен",
+        n_nervous: "Нервозен", n_jittery: "Встревожен", n_afraid: "Напуган",
+      },
+      legendNow: "Сейчас",
+      legendGeneral: "Обычно",
+      axisEnergy: "позитивная энергия →",
+      axisTension: "напряжение →",
+      scorePA: "Позитивная энергия",
+      scoreNA: "Напряжение",
+      badgeNow: "Прямо сейчас",
+      badgeGeneral: "В целом за 2 недели",
+      quadrants: { drive: "Драйв", overheat: "Перегрев", anxiety: "Тревога", calm: "Затишье" },
+      quadrantDesc: {
+        drive:    "Много энергии и мало напряжения — легко действовать и радоваться сделанному. Хорошая точка, чтобы браться за важное.",
+        overheat: "Энергии много, но и напряжение высокое. Ты на оборотах — так можно сделать рывок, но долго не проживёшь. Подумай про паузы заранее.",
+        anxiety:  "Напряжение есть, а сил на него не хватает. Выматывающее сочетание, и это не про слабость — тело просит восстановления.",
+        calm:     "И энергии, и напряжения немного. Может быть спокойным отдыхом, а может — приглушённостью, когда ничего не радует. Прислушайся, что ближе.",
+      },
+      gapTitle: "Что говорит разрыв",
+      gapDip:    "Сейчас заметно тяжелее, чем обычно. Похоже на разовую яму — реакция на день или события. Лечится восстановлением: сон, пауза, опоры. Скорее всего, отпустит.",
+      gapBase:   "И «сейчас», и «обычно» в непростой зоне — это не разовый спад, а твоя база. Разбираться стоит не наскоком, а системно: маленькими шагами. Это решаемо.",
+      gapHonest: "«Сейчас» и «обычно» рядом — замер честный и устойчивый. То, что видишь, отражает реальное состояние, а не настроение момента.",
+      gapUp:     "Сейчас тебе заметно лучше обычного. Пойми, что именно сработало в эти дни — такие подъёмы стоит уметь повторять.",
+      nextStep: {
+        drive:    "Ты в ресурсе — вложи его в важное, пока идёт. Не разменивай на мелочи.",
+        overheat: "Сбрось обороты заранее: сон и паузы сегодня, а не когда сорвёт.",
+        anxiety:  "Первым делом — восстановление: сон, опора, меньше нагрузки. Потом уже подвиги.",
+        calm:     "Разберись: это отдых или апатия — и добавь одно дело, которое реально зажигает.",
+      },
+    },
+
+    // ТЕСТ МИРА (правда / спорно / миф)
+    world: {
+      title: "Тест мира",
+      kicker: "Правда, спорно или миф?",
+      hint: "Реши сам, не угадывай под ответ",
+      verdicts: { true: "Правда", disputed: "Спорно", myth: "Миф" },
+      claims: {
+        w1: { text: "Кальций из воды засоряет сосуды", expl: "Кальций из воды не «цементирует» сосуды — это страшилка инфоцыган." },
+        w2: { text: "Во сне мозг вымывает продукты обмена", expl: "Глимфатическая система во сне вымывает бета-амилоид и тау. Детали наука ещё уточняет." },
+        w3: { text: "Обратный осмос убирает и вредное, и полезные минералы", expl: "Именно поэтому вывод простой: фильтровать И реминерализовать." },
+        w4: { text: "Долголетие в голубых зонах — заслуга их воды", expl: "Зоны подтверждены (Gerontologist, 2025), но долголетие там — от комплекса факторов, не от воды." },
+        w5: { text: "Около 2 киви покрывают суточную норму витамина C", expl: "Еда закрывает норму — баночка не нужна." },
+        w6: { text: "Чем больше белка, тем лучше — нормы не важны", expl: "Есть нормы: ~0,8 г/кг база, ~1,2 г/кг для активных. Больше — не автоматически лучше." },
+        w7: { text: "Наука уже полностью разобралась, как работает сон", expl: "Наука спорит о деталях и честно это признаёт. Это усиливает доверие, а не подрывает." },
+        w8: { text: "Если эксперт говорит уверенно — можно не проверять", expl: "Уверенный тон — не доказательство. Пойми сам и убедись." },
+      },
+      correctLabel: "Верно",
+      yourLabel: "Ты",
+      bands: {
+        high: "Тебя трудно провести",
+        mid:  "Чуйка рабочая, но есть щели",
+        low:  "Тебя пока легко водят за нос",
+      },
+      bandDesc: {
+        high: "Ты не глотаешь уверенный тон как доказательство и держишь «спорное» отдельно от «правды». Это и есть базовая настройка.",
+        mid:  "Основа есть, но часть громких мифов пока проходит. Дальше — вопрос привычки проверять, а не верить на слово.",
+        low:  "Пока тебя легко убедить красивой подачей. Это не приговор — различать правду и враньё можно натренировать.",
+      },
+      scoreLabel: "Устойчивость к вранью",
+      nextStep: "Правило простое: уверенный тон — не доказательство. Встретил громкий тезис — спроси «а откуда это известно?» до того, как поверил.",
+    },
+
+    // Синтез троицы
+    synth: {
+      eyebrow: "Твоя базовая настройка",
+      title: "Три двери пройдены. Вот как ты настроен.",
+      cells: { body: "Тело", psyche: "Психика", world: "Мир" },
+      read: "Это стартовый срез, а не приговор. Тело даёт энергию, психика — состояние, мир — защиту от вранья. Слабое звено и есть твоя точка роста.",
+      nextTitle: "Что делать дальше",
+      next: "Возьми одно слабое звено из трёх и займись им 2 недели. Не всё сразу — базовая настройка собирается по кирпичу.",
+    },
+  },
+
+  /* ============================ ROMÂNĂ ============================ */
+  ro: {
+    ui: {
+      eyebrow: "Setarea de bază a omului",
+      heroTitle: "În 5 minute vei înțelege ce e cu tine — <span class='hl'>și ce ai de făcut</span>.",
+      heroLead: "Nu crede pe cuvânt. Fă testul — și convinge-te singur. Corp, psihic, imaginea lumii — fără gunoi și fără minciună.",
+      thesis: "Toți vând borcănașe, frică și credință. Noi dăm setare și încredere.",
+
+      trinityLabel: "Sfânta treime",
+      trinityHint: "Alege o ușă sau fă tot",
+      trinityCta: "Fă toată treimea",
+      trinityCtaSub: "Corp · Psihic · Lume — complet, ~10 minute",
+
+      back: "← Înapoi",
+      startOne: "Fă testul",
+
+      count: "{i} din {n}",
+      testOfN: "Testul {k} din {m}",
+
+      resultEyebrowOne: "Rezultat",
+      resultEyebrowAll: "Setarea ta de bază",
+      whatNext: "Ce ai de făcut",
+      moreTests: "Spre celelalte teste",
+      againOne: "Reia testul",
+
+      emailTitle: "Vrei o analiză mai profundă — și corpul cu lumea primul?",
+      emailSub: "Lasă-ți e-mailul: îți trimitem o analiză a rezultatului și pași clari. Fără spam, fără minciună.",
+      emailPlaceholder: "e-mailul tău",
+      emailBtn: "Trimite-mi analiza",
+      emailOk: "Gata. E-mailul e salvat — analiza vine prima.",
+      emailErr: "Verifică adresa — pare o greșeală.",
+      emailDup: "Acest e-mail este deja salvat.",
+
+      footerBrand: "<b>HealthyWolk</b> · setarea de bază a omului",
+      disclaimer: "Teste în scop informativ, nu diagnostic medical. Ce e discutabil, îl numim discutabil.",
+    },
+
+    doors: {
+      body:   { title: "Corp",   tag: "Chimia organismului", desc: "Somn, apă, alimentație, mișcare. De ce are nevoie corpul ca să meargă clar — și cum verifici, nu ghicești." },
+      psyche: { title: "Psihic", tag: "Chimia emoțiilor",    desc: "Cum îți funcționează capul: de unde vin furia și apatia, cum îți înțelegi starea. Test-cadran." },
+      world:  { title: "Lume",   tag: "Adevăr și minciună",  desc: "Cum deosebești adevărul de minciună și nu te lași păcălit. Vezi cât de ușor poți fi dus de nas." },
+    },
+
+    body: {
+      title: "Testul corpului",
+      kicker: "Cât de mult te descrie asta?",
+      hint: "1 — deloc despre mine · 5 — exact despre mine",
+      scaleLow: "Nu despre mine",
+      scaleHigh: "Exact despre mine",
+      statements: {
+        b_sleep1: "Dorm 7–8 ore și mă trezesc odihnit",
+        b_sleep2: "Somnul meu e profund, rar mă trezesc noaptea",
+        b_water1: "Beau destulă apă curată pe parcursul zilei",
+        b_water2: "Sunt atent la calitatea apei, nu beau orice",
+        b_food1:  "Am destule proteine în zi (carne, pește, ouă, brânză)",
+        b_food2:  "Mănânc legume și fibre în fiecare zi",
+        b_food3:  "Iau vitaminele din mâncare, nu din borcănașe",
+        b_move1:  "Mă mișc zilnic — merg pe jos sau mă antrenez",
+        b_move2:  "Măcar din când în când îmi verific analizele de bază, nu ghicesc",
+      },
+      domains: { sleep: "Somn", water: "Apă", food: "Alimentație", move: "Mișcare și analize" },
+      bands: {
+        high: "Corpul e setat",
+        mid:  "Baza există, e loc de creștere",
+        low:  "Corpul cere atenție",
+      },
+      bandDesc: {
+        high: "Fundamentul e în regulă. Ține ritmul și nu strica ce funcționează — stabilitatea bate salturile.",
+        mid:  "Fundamentul e pus, dar există o verigă slabă. O întărești punctual — și simți diferența.",
+        low:  "Corpul nu lucrează acum la capacitate. Vestea bună: lucrurile de bază se repară mai repede decât pare.",
+      },
+      weakLabel: "Veriga slabă",
+      tips: {
+        sleep: "Somnul e blocul cel mai tare. În somn creierul chiar spală gunoiul (beta-amiloid). Țintește profunzimea și ritmul, nu doar orele.",
+        water: "Filtrează și remineralizează: osmoza scoate și răul, și mineralele bune. Iar „calciul din apă înfundă vasele” e un mit, aruncă-l.",
+        food:  "Ia vitaminele din mâncare: ~2 kiwi ≈ vitamina C pe zi. Proteine 0,8–1,2 g/kg, fibre 25–38 g. Borcănașele nu-s necesare.",
+        move:  "Mișcă-te zilnic și verifică analizele de bază, nu ghici după senzații. Cifrele-s mai oneste decât starea.",
+      },
+      nextStep: "Începe cu o singură verigă slabă, nu cu tot deodată. Un obicei pentru 2 săptămâni — și următorul test arată mișcarea.",
+    },
+
+    psyche: {
+      title: "Testul psihicului",
+      qNow: "Cum ești CHIAR ACUM?",
+      qGeneral: "Cum ai fost ÎN GENERAL în ultimele 2 săptămâni?",
+      stageNow: "Măsurătoarea 1 din 2 · acum",
+      stageGeneral: "Măsurătoarea 2 din 2 · 2 săptămâni",
+      hint: "Cât de mult ești tu în acest moment?",
+      scaleLow: "Deloc",
+      scaleHigh: "Foarte mult",
+      words: {
+        p_interested: "Interesat", p_enthusiastic: "Însuflețit", p_strong: "Plin de forță",
+        p_energetic: "Energic", p_proud: "Mândru", p_attentive: "Atent",
+        p_inspired: "Inspirat", p_determined: "Hotărât", p_alert: "Vioi", p_active: "Activ",
+        n_distressed: "Abătut", n_upset: "Supărat", n_guilty: "Vinovat", n_scared: "Speriat",
+        n_hostile: "Ostil", n_irritable: "Iritat", n_ashamed: "Rușinat",
+        n_nervous: "Nervos", n_jittery: "Agitat", n_afraid: "Înfricoșat",
+      },
+      legendNow: "Acum",
+      legendGeneral: "De obicei",
+      axisEnergy: "energie pozitivă →",
+      axisTension: "tensiune →",
+      scorePA: "Energie pozitivă",
+      scoreNA: "Tensiune",
+      badgeNow: "Chiar acum",
+      badgeGeneral: "În ultimele 2 săptămâni",
+      quadrants: { drive: "Avânt", overheat: "Supraîncălzire", anxiety: "Anxietate", calm: "Acalmie" },
+      quadrantDesc: {
+        drive:    "Multă energie și puțină tensiune — e ușor să acționezi și să te bucuri. Un moment bun să te apuci de ce contează.",
+        overheat: "Energie multă, dar și tensiune mare. Ești la turație — bun pentru un sprint, dar nu poți trăi așa mult. Planifică pauze din timp.",
+        anxiety:  "Tensiune există, dar nu ai destulă putere. Un amestec epuizant — și nu e slăbiciune: corpul cere refacere.",
+        calm:     "Și energia, și tensiunea sunt scăzute. Poate fi odihnă, poate amorțeală în care nimic nu te bucură. Observă care e mai aproape.",
+      },
+      gapTitle: "Ce spune diferența",
+      gapDip:    "Acum e vizibil mai greu decât de obicei. Pare o cădere de moment — reacție la o zi sau la evenimente. Se rezolvă cu refacere: somn, pauză, sprijine. Cel mai probabil trece.",
+      gapBase:   "Și „acum”, și „de obicei” sunt într-o zonă grea — nu e o cădere de moment, ci baza ta. Se abordează sistematic, nu dintr-o smucitură. Se poate.",
+      gapHonest: "„Acum” și „de obicei” sunt aproape — măsurătoarea e sinceră și stabilă. Ce vezi reflectă starea reală, nu o dispoziție de moment.",
+      gapUp:     "Acum ești vizibil mai bine decât de obicei. Înțelege ce a funcționat în aceste zile — astfel de reveniri merită repetate.",
+      nextStep: {
+        drive:    "Ești în resursă — investește-o în ce contează, cât ține. Nu o risipi pe mărunțișuri.",
+        overheat: "Scade turația din timp: somn și pauze azi, nu când te rupe.",
+        anxiety:  "Întâi refacerea: somn, sprijin, mai puțină încărcare. Isprăvile vin după.",
+        calm:     "Lămurește: e odihnă sau apatie — și adaugă un lucru care chiar te aprinde.",
+      },
+    },
+
+    world: {
+      title: "Testul lumii",
+      kicker: "Adevărat, discutabil sau mit?",
+      hint: "Decide singur, nu ghici răspunsul",
+      verdicts: { true: "Adevărat", disputed: "Discutabil", myth: "Mit" },
+      claims: {
+        w1: { text: "Calciul din apă înfundă vasele de sânge", expl: "Calciul din apă nu „cimentează” vasele — e o sperietoare de vânzători." },
+        w2: { text: "În somn creierul spală produșii de metabolism", expl: "Sistemul glimfatic spală în somn beta-amiloidul și tau. Detaliile sunt încă cercetate." },
+        w3: { text: "Osmoza inversă scoate și răul, și mineralele bune", expl: "Tocmai de aceea concluzia e simplă: filtrezi ȘI remineralizezi." },
+        w4: { text: "Longevitatea din zonele albastre e meritul apei lor", expl: "Zonele sunt confirmate (Gerontologist, 2025), dar longevitatea vine dintr-un complex de factori, nu din apă." },
+        w5: { text: "Circa 2 kiwi acoperă necesarul zilnic de vitamina C", expl: "Mâncarea acoperă norma — borcănașul nu e necesar." },
+        w6: { text: "Cu cât mai multă proteină, cu atât mai bine — normele nu contează", expl: "Există norme: ~0,8 g/kg bază, ~1,2 g/kg pentru activi. Mai mult nu e automat mai bine." },
+        w7: { text: "Știința a lămurit deja complet cum funcționează somnul", expl: "Știința se ceartă pe detalii și recunoaște asta cinstit. Asta întărește încrederea, nu o slăbește." },
+        w8: { text: "Dacă un expert vorbește sigur — poți să nu verifici", expl: "Tonul sigur nu e o dovadă. Înțelege singur și convinge-te." },
+      },
+      correctLabel: "Corect",
+      yourLabel: "Tu",
+      bands: {
+        high: "Greu de păcălit",
+        mid:  "Instinctul merge, dar are fisuri",
+        low:  "Deocamdată ești ușor de dus de nas",
+      },
+      bandDesc: {
+        high: "Nu înghiți tonul sigur drept dovadă și ții „discutabilul” separat de „adevăr”. Asta e setarea de bază.",
+        mid:  "Baza există, dar o parte din miturile zgomotoase încă trec. Mai departe e obiceiul de a verifica, nu de a crede pe cuvânt.",
+        low:  "Deocamdată te convinge ușor o prezentare frumoasă. Nu e o sentință — deosebirea adevăr/minciună se antrenează.",
+      },
+      scoreLabel: "Rezistență la minciună",
+      nextStep: "Regula e simplă: tonul sigur nu e dovadă. Ai dat de o afirmație tare — întreabă „de unde se știe asta?” înainte să crezi.",
+    },
+
+    synth: {
+      eyebrow: "Setarea ta de bază",
+      title: "Ai trecut prin trei uși. Iată cum ești setat.",
+      cells: { body: "Corp", psyche: "Psihic", world: "Lume" },
+      read: "E o radiografie de start, nu o sentință. Corpul dă energie, psihicul — starea, lumea — apărarea de minciună. Veriga slabă e chiar punctul tău de creștere.",
+      nextTitle: "Ce ai de făcut",
+      next: "Ia o singură verigă slabă din trei și lucreaz-o 2 săptămâni. Nu tot deodată — setarea de bază se strânge cărămidă cu cărămidă.",
+    },
+  },
+
+  /* ============================ ENGLISH ============================ */
+  en: {
+    ui: {
+      eyebrow: "A human's baseline setup",
+      heroTitle: "In 5 minutes you'll understand what's going on — <span class='hl'>and what to do next</span>.",
+      heroLead: "Don't take it on faith. Take the test — and see for yourself. Body, psyche, worldview — no junk, no lies.",
+      thesis: "Everyone sells jars, fear and belief. We give you a setup and confidence.",
+
+      trinityLabel: "The holy trinity",
+      trinityHint: "Pick a door or do all three",
+      trinityCta: "Take the whole trinity",
+      trinityCtaSub: "Body · Psyche · World — all of it, ~10 min",
+
+      back: "← Back",
+      startOne: "Take the test",
+
+      count: "{i} of {n}",
+      testOfN: "Test {k} of {m}",
+
+      resultEyebrowOne: "Result",
+      resultEyebrowAll: "Your baseline setup",
+      whatNext: "What to do next",
+      moreTests: "To the other tests",
+      againOne: "Take it again",
+
+      emailTitle: "Want a deeper breakdown — and body & world first?",
+      emailSub: "Leave your email: we'll send a breakdown of your result and clear steps. No spam, no lies.",
+      emailPlaceholder: "your email",
+      emailBtn: "Send my breakdown",
+      emailOk: "Done. Email saved — the breakdown comes first.",
+      emailErr: "Check the address — looks like a typo.",
+      emailDup: "This email is already saved.",
+
+      footerBrand: "<b>HealthyWolk</b> · a human's baseline setup",
+      disclaimer: "Tests are for informational purposes, not medical diagnosis. What's debatable, we call debatable.",
+    },
+
+    doors: {
+      body:   { title: "Body",   tag: "Body chemistry",   desc: "Sleep, water, food, movement. What the body actually needs to run clean — and how to check it, not guess." },
+      psyche: { title: "Psyche", tag: "Emotion chemistry", desc: "How your head works: where anger and low moods come from, how to read your own state. A quadrant test." },
+      world:  { title: "World",  tag: "Truth vs lies",    desc: "How to tell truth from lies and not get fooled. See how easily you can be led by the nose." },
+    },
+
+    body: {
+      title: "Body test",
+      kicker: "How much is this you?",
+      hint: "1 — not me at all · 5 — definitely me",
+      scaleLow: "Not me",
+      scaleHigh: "Definitely me",
+      statements: {
+        b_sleep1: "I sleep 7–8 hours and wake up rested",
+        b_sleep2: "My sleep is deep, I rarely wake up at night",
+        b_water1: "I drink enough clean water through the day",
+        b_water2: "I mind my water quality, I don't drink just anything",
+        b_food1:  "My day has enough protein (meat, fish, eggs, cottage cheese)",
+        b_food2:  "I eat vegetables and fiber every day",
+        b_food3:  "I get vitamins from food, not from jars",
+        b_move1:  "I move every day — I walk or train",
+        b_move2:  "At least sometimes I check basic bloodwork instead of guessing",
+      },
+      domains: { sleep: "Sleep", water: "Water", food: "Food", move: "Movement & labs" },
+      bands: {
+        high: "Body is dialed in",
+        mid:  "Foundation is there, room to grow",
+        low:  "Body is asking for attention",
+      },
+      bandDesc: {
+        high: "The base is solid. Keep the rhythm and don't break what works — steadiness beats sprints.",
+        mid:  "The foundation is laid, but there's a weak link. Fix it precisely — and you'll feel the difference.",
+        low:  "Your body isn't running at full power right now. Good news: the basics fix faster than you'd think.",
+      },
+      weakLabel: "Weak link",
+      tips: {
+        sleep: "Sleep is the hardest block. In sleep the brain literally flushes out junk (beta-amyloid). Aim for depth and rhythm, not just hours.",
+        water: "Filter and remineralize: osmosis strips out the bad and the good minerals alike. And \"calcium from water clogs arteries\" is a myth — drop it.",
+        food:  "Get vitamins from food: ~2 kiwis ≈ a day's vitamin C. Protein 0.8–1.2 g/kg, fiber 25–38 g. No jars needed.",
+        move:  "Move daily and check basic bloodwork instead of guessing by feel. Numbers are more honest than how you feel.",
+      },
+      nextStep: "Start with one weak link, not everything at once. One habit for 2 weeks — and the next check-in shows the shift.",
+    },
+
+    psyche: {
+      title: "Psyche test",
+      qNow: "How are you RIGHT NOW?",
+      qGeneral: "How have you been IN GENERAL over the past 2 weeks?",
+      stageNow: "Check-in 1 of 2 · now",
+      stageGeneral: "Check-in 2 of 2 · 2 weeks",
+      hint: "How much is this you at this moment?",
+      scaleLow: "Not at all",
+      scaleHigh: "Very much",
+      words: {
+        p_interested: "Interested", p_enthusiastic: "Enthusiastic", p_strong: "Strong",
+        p_energetic: "Energetic", p_proud: "Proud", p_attentive: "Attentive",
+        p_inspired: "Inspired", p_determined: "Determined", p_alert: "Alert", p_active: "Active",
+        n_distressed: "Distressed", n_upset: "Upset", n_guilty: "Guilty", n_scared: "Scared",
+        n_hostile: "Hostile", n_irritable: "Irritable", n_ashamed: "Ashamed",
+        n_nervous: "Nervous", n_jittery: "Jittery", n_afraid: "Afraid",
+      },
+      legendNow: "Now",
+      legendGeneral: "Usually",
+      axisEnergy: "positive energy →",
+      axisTension: "tension →",
+      scorePA: "Positive energy",
+      scoreNA: "Tension",
+      badgeNow: "Right now",
+      badgeGeneral: "Over the past 2 weeks",
+      quadrants: { drive: "Drive", overheat: "Overheat", anxiety: "Anxiety", calm: "Lull" },
+      quadrantDesc: {
+        drive:    "Lots of energy, little tension — easy to act and enjoy it. A good place to take on what matters.",
+        overheat: "Plenty of energy, but tension runs high. You're at full revs — good for a sprint, but you can't stay here. Plan breaks in advance.",
+        anxiety:  "Tension is there, but not enough strength to meet it. A draining mix — and it's not weakness: your body wants recovery.",
+        calm:     "Both energy and tension are low. Could be restful, could be a flatness where nothing sparks. Notice which is closer.",
+      },
+      gapTitle: "What the gap tells you",
+      gapDip:    "Right now is noticeably harder than usual. Looks like a one-off dip — a reaction to a day or events. It heals with recovery: sleep, a pause, anchors. It'll likely ease.",
+      gapBase:   "Both \"now\" and \"usually\" sit in a tough zone — not a one-off slump, but your baseline. Best handled systematically, not in one push. It's solvable.",
+      gapHonest: "\"Now\" and \"usually\" are close — an honest, stable read. What you see reflects your real state, not a passing mood.",
+      gapUp:     "Right now you're noticeably better than usual. Figure out what worked these days — such lifts are worth repeating.",
+      nextStep: {
+        drive:    "You're in resource — put it into what matters while it lasts. Don't spend it on trivia.",
+        overheat: "Ease off the revs early: sleep and pauses today, not when you snap.",
+        anxiety:  "Recovery first: sleep, support, less load. Heroics come after.",
+        calm:     "Sort out whether it's rest or apathy — and add one thing that actually lights you up.",
+      },
+    },
+
+    world: {
+      title: "World test",
+      kicker: "True, debatable or myth?",
+      hint: "Decide for yourself, don't guess the answer",
+      verdicts: { true: "True", disputed: "Debatable", myth: "Myth" },
+      claims: {
+        w1: { text: "Calcium from water clogs your arteries", expl: "Calcium from water doesn't \"cement\" your vessels — that's a salesman's scare." },
+        w2: { text: "During sleep the brain flushes out metabolic waste", expl: "The glymphatic system clears beta-amyloid and tau in sleep. Science is still refining the details." },
+        w3: { text: "Reverse osmosis removes both the bad and the good minerals", expl: "Which is exactly why the takeaway is simple: filter AND remineralize." },
+        w4: { text: "Longevity in blue zones is thanks to their water", expl: "The zones are confirmed (Gerontologist, 2025), but longevity there comes from a mix of factors, not the water." },
+        w5: { text: "About 2 kiwis cover a day's vitamin C", expl: "Food covers the norm — no jar needed." },
+        w6: { text: "The more protein the better — norms don't matter", expl: "There are norms: ~0.8 g/kg base, ~1.2 g/kg for active people. More isn't automatically better." },
+        w7: { text: "Science has already fully figured out how sleep works", expl: "Science argues over the details and admits it honestly. That builds trust, it doesn't break it." },
+        w8: { text: "If an expert sounds confident — you don't need to check", expl: "A confident tone isn't proof. Understand it yourself and verify." },
+      },
+      correctLabel: "Correct",
+      yourLabel: "You",
+      bands: {
+        high: "Hard to fool",
+        mid:  "Your gut works, but has gaps",
+        low:  "For now, you're easily led",
+      },
+      bandDesc: {
+        high: "You don't swallow a confident tone as proof, and you keep \"debatable\" apart from \"true\". That's the baseline setup.",
+        mid:  "The base is there, but some loud myths still get through. From here it's the habit of checking, not believing on faith.",
+        low:  "For now a slick delivery convinces you easily. Not a verdict — telling truth from lies can be trained.",
+      },
+      scoreLabel: "Resistance to lies",
+      nextStep: "The rule is simple: a confident tone isn't proof. Hit a loud claim — ask \"how is this known?\" before you believe it.",
+    },
+
+    synth: {
+      eyebrow: "Your baseline setup",
+      title: "Three doors done. Here's how you're set up.",
+      cells: { body: "Body", psyche: "Psyche", world: "World" },
+      read: "This is a starting scan, not a verdict. Body gives energy, psyche gives state, world gives protection from lies. Your weak link is your growth point.",
+      nextTitle: "What to do next",
+      next: "Take one weak link out of three and work it for 2 weeks. Not all at once — a baseline setup is built brick by brick.",
+    },
+  },
+};
+
+/* Активный язык — изменяемый. detectLang() выставит реальное значение при старте. */
+let LANG = "ru";
+
+// Достаём строку по пути "a.b.c" из текущего языка
+function t(path) {
+  return path.split(".").reduce((o, k) => (o == null ? o : o[k]), TI18N[LANG]);
+}
+// Подстановка {i}/{n}
+function fmt(str, vars) {
+  return String(str).replace(/\{(\w+)\}/g, (_, k) => (k in vars ? vars[k] : `{${k}}`));
+}
+
+/* =========================================================================
+   2. CONFIG + TESTS — данные без текста. Тексты берутся из TI18N по ID.
+   ========================================================================= */
+const CONFIG = {
+  supportedLangs: ["ru", "ro", "en"],
+  defaultLang: "ru",
+  langKey: "healthywolk_lang",
+  storageKey: "healthywolk_emails",
+};
+
+const SCALE_MIN = 1, SCALE_MAX = 5;
+
+// Тело: 9 утверждений по 4 доменам. Все сформулированы «в плюс» → выше = лучше.
+const BODY = {
+  statements: [
+    { id: "b_sleep1", domain: "sleep" },
+    { id: "b_sleep2", domain: "sleep" },
+    { id: "b_water1", domain: "water" },
+    { id: "b_water2", domain: "water" },
+    { id: "b_food1",  domain: "food" },
+    { id: "b_food2",  domain: "food" },
+    { id: "b_food3",  domain: "food" },
+    { id: "b_move1",  domain: "move" },
+    { id: "b_move2",  domain: "move" },
+  ],
+  domainOrder: ["sleep", "water", "food", "move"],
+};
+
+// Психика: PANAS. 10 позитивных + 10 негативных. Два замера. По стабильным ID.
+const PSYCHE = {
+  positive: ["p_interested","p_enthusiastic","p_strong","p_energetic","p_proud","p_attentive","p_inspired","p_determined","p_alert","p_active"],
+  negative: ["n_distressed","n_upset","n_guilty","n_scared","n_hostile","n_irritable","n_ashamed","n_nervous","n_jittery","n_afraid"],
+  measures: ["now", "general"],
+  thresholds: { pa: 30, na: 25 }, // из ТЗ PANAS
+};
+
+// Мир: 8 утверждений с правильным вердиктом (true | disputed | myth).
+const WORLD = {
+  claims: [
+    { id: "w1", answer: "myth" },
+    { id: "w2", answer: "true" },
+    { id: "w3", answer: "true" },
+    { id: "w4", answer: "disputed" },
+    { id: "w5", answer: "true" },
+    { id: "w6", answer: "myth" },
+    { id: "w7", answer: "myth" },
+    { id: "w8", answer: "myth" },
+  ],
+  verdictOrder: ["true", "disputed", "myth"],
+};
+
+const VERDICT_COLOR = { true: "var(--ok)", disputed: "var(--warn)", myth: "var(--bad)" };
+
+/* =========================================================================
+   3. Состояние прохождения
+   ========================================================================= */
+const STATE = {
+  queue: [],        // ['psyche'] или ['body','psyche','world']
+  combined: false,  // режим «троица»
+  testIndex: 0,     // индекс текущего теста в очереди
+  steps: [],        // плоский список шагов текущего теста
+  stepIndex: 0,     // индекс текущего шага
+  answers: {        // ответы по всем тестам, по стабильным ID
+    body: {},
+    psyche: { now: {}, general: {} },
+    world: {},
+  },
+};
+
+/* =========================================================================
+   4. Утилиты
+   ========================================================================= */
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function pct01to100(sum, min, max) { return Math.round(((sum - min) / (max - min)) * 100); }
+function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+/* =========================================================================
+   5. Построение шагов теста (что показываем по одному)
+   ========================================================================= */
+function buildSteps(testId) {
+  if (testId === "body") {
+    // перемешиваем, чтобы домены не шли кучей
+    return shuffle(BODY.statements).map((s) => ({ testId, type: "scale5", id: s.id, domain: s.domain }));
+  }
+  if (testId === "psyche") {
+    // для каждого замера — свой перемешанный порядок 20 слов
+    const steps = [];
+    PSYCHE.measures.forEach((measure) => {
+      const words = shuffle([
+        ...PSYCHE.positive.map((id) => ({ id, polarity: "pos" })),
+        ...PSYCHE.negative.map((id) => ({ id, polarity: "neg" })),
+      ]);
+      words.forEach((w) => steps.push({ testId, type: "scale5", measure, id: w.id, polarity: w.polarity }));
+    });
+    return steps;
+  }
+  if (testId === "world") {
+    return shuffle(WORLD.claims).map((c) => ({ testId, type: "choice3", id: c.id, answer: c.answer }));
+  }
+  return [];
+}
+
+// Сколько шагов «внутри одного теста» показывать в счётчике (для психики — по замеру)
+function localCount(step, steps) {
+  if (step.testId === "psyche") {
+    const inMeasure = steps.filter((s) => s.measure === step.measure);
+    const idx = inMeasure.indexOf(step);
+    return { i: idx + 1, n: inMeasure.length };
+  }
+  const idx = steps.indexOf(step);
+  return { i: idx + 1, n: steps.length };
+}
+
+/* =========================================================================
+   6. Навигация между экранами
+   ========================================================================= */
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("active", s.id === id));
+  window.scrollTo(0, 0);
+}
+function activeScreenId() {
+  const el = document.querySelector(".screen.active");
+  return el ? el.id : "intro";
+}
+
+/* =========================================================================
+   7. Запуск теста / очереди
+   ========================================================================= */
+function startSession(queue, combined) {
+  STATE.queue = queue;
+  STATE.combined = combined;
+  STATE.testIndex = 0;
+  // сброс ответов на новый прогон
+  STATE.answers = { body: {}, psyche: { now: {}, general: {} }, world: {} };
+  startCurrentTest();
+  showScreen("test");
+}
+function startCurrentTest() {
+  STATE.steps = buildSteps(STATE.queue[STATE.testIndex]);
+  STATE.stepIndex = 0;
+  renderStep();
+}
+
+/* =========================================================================
+   8. Рендер текущего шага
+   ========================================================================= */
+const qInputEl = document.getElementById("qInput");
+
+function renderStep() {
+  const step = STATE.steps[STATE.stepIndex];
+  const testId = step.testId;
+
+  // --- прогресс ---
+  const { i, n } = localCount(step, STATE.steps);
+  document.getElementById("countLabel").textContent = fmt(t("ui.count"), { i, n });
+  document.getElementById("progressFill").style.width = (i / n) * 100 + "%";
+
+  // подпись стадии
+  let stage;
+  if (testId === "psyche") {
+    stage = step.measure === "now" ? t("psyche.stageNow") : t("psyche.stageGeneral");
+  } else {
+    stage = t(testId + ".title");
+  }
+  document.getElementById("stageLabel").textContent = stage;
+
+  // точки прогресса троицы
+  const dotsEl = document.getElementById("trinityDots");
+  if (STATE.combined) {
+    dotsEl.style.display = "flex";
+    dotsEl.innerHTML = STATE.queue.map((_, k) => {
+      const cls = k < STATE.testIndex ? "done" : (k === STATE.testIndex ? "cur" : "");
+      return `<i class="${cls}"></i>`;
+    }).join("");
+  } else {
+    dotsEl.style.display = "none";
+  }
+
+  // --- вопрос ---
+  const kicker = document.getElementById("qKicker");
+  const main = document.getElementById("qMain");
+  const hint = document.getElementById("qHint");
+
+  if (step.type === "scale5") {
+    if (testId === "psyche") {
+      kicker.textContent = step.measure === "now" ? t("psyche.qNow") : t("psyche.qGeneral");
+      main.innerHTML = `<div class="q-word">${t("psyche.words." + step.id)}</div>`;
+      hint.textContent = t("psyche.hint");
+      renderScale(testId, step);
+    } else { // body
+      kicker.textContent = t("body.kicker");
+      main.innerHTML = `<div class="q-word">${t("body.statements." + step.id)}</div>`;
+      hint.textContent = t("body.hint");
+      renderScale(testId, step);
+    }
+  } else if (step.type === "choice3") {
+    kicker.textContent = t("world.kicker");
+    main.innerHTML = `<div class="q-claim">«${t("world.claims." + step.id + ".text")}»</div>`;
+    hint.textContent = t("world.hint");
+    renderVerdicts(step);
+  }
+}
+
+// Шкала 1–5
+function renderScale(testId, step) {
+  const legendLow = t(testId + ".scaleLow");
+  const legendHigh = t(testId + ".scaleHigh");
+  const prev = testId === "psyche"
+    ? STATE.answers.psyche[step.measure][step.id]
+    : STATE.answers.body[step.id];
+
+  let html = '<div class="scale">';
+  for (let v = SCALE_MIN; v <= SCALE_MAX; v++) {
+    html += `<button type="button" data-v="${v}" class="${prev === v ? "chosen" : ""}">${v}</button>`;
+  }
+  html += `</div><div class="scale-legend"><span>${legendLow}</span><span>${legendHigh}</span></div>`;
+  qInputEl.innerHTML = html;
+
+  qInputEl.querySelectorAll(".scale button").forEach((b) =>
+    b.addEventListener("click", () => {
+      const v = Number(b.dataset.v);
+      if (testId === "psyche") STATE.answers.psyche[step.measure][step.id] = v;
+      else STATE.answers.body[step.id] = v;
+      b.classList.add("chosen");
+      setTimeout(advance, 150);
+    })
+  );
+}
+
+// Вердикты правда/спорно/миф
+function renderVerdicts(step) {
+  const prev = STATE.answers.world[step.id];
+  let html = '<div class="verdicts">';
+  WORLD.verdictOrder.forEach((v) => {
+    html += `<button type="button" data-v="${v}" class="${prev === v ? "chosen" : ""}">
+      <span class="vk" style="background:${VERDICT_COLOR[v]}"></span>${t("world.verdicts." + v)}
+    </button>`;
+  });
+  html += "</div>";
+  qInputEl.innerHTML = html;
+
+  qInputEl.querySelectorAll(".verdicts button").forEach((b) =>
+    b.addEventListener("click", () => {
+      STATE.answers.world[step.id] = b.dataset.v;
+      qInputEl.querySelectorAll(".verdicts button").forEach((x) => x.classList.remove("chosen"));
+      b.classList.add("chosen");
+      setTimeout(advance, 180);
+    })
+  );
+}
+
+/* =========================================================================
+   9. Переходы вперёд/назад
+   ========================================================================= */
+function advance() {
+  if (STATE.stepIndex < STATE.steps.length - 1) {
+    STATE.stepIndex++;
+    renderStep();
+  } else {
+    finishCurrentTest();
+  }
+}
+function goBack() {
+  if (STATE.stepIndex > 0) {
+    STATE.stepIndex--;
+    renderStep();
+  } else if (STATE.combined && STATE.testIndex > 0) {
+    // назад в конец предыдущего теста
+    STATE.testIndex--;
+    STATE.steps = buildSteps(STATE.queue[STATE.testIndex]);
+    STATE.stepIndex = STATE.steps.length - 1;
+    renderStep();
+  } else {
+    showScreen("home");
+  }
+}
+function finishCurrentTest() {
+  if (STATE.combined && STATE.testIndex < STATE.queue.length - 1) {
+    STATE.testIndex++;
+    startCurrentTest();
+  } else if (STATE.combined) {
+    renderCombinedResult();
+    showScreen("result");
+  } else {
+    renderSingleResult(STATE.queue[STATE.testIndex]);
+    showScreen("result");
+  }
+}
+
+/* =========================================================================
+   10. Подсчёт результатов
+   ========================================================================= */
+
+// --- ТЕЛО ---
+function computeBody() {
+  const perDomain = {};
+  BODY.domainOrder.forEach((d) => (perDomain[d] = []));
+  BODY.statements.forEach((s) => {
+    const v = STATE.answers.body[s.id] || 0;
+    perDomain[s.domain].push(v);
+  });
+  const domainPct = {};
+  BODY.domainOrder.forEach((d) => {
+    const vals = perDomain[d];
+    const avg = vals.reduce((a, b) => a + b, 0) / vals.length; // 1..5
+    domainPct[d] = pct01to100(avg, 1, 5);
+  });
+  const overall = Math.round(BODY.domainOrder.reduce((a, d) => a + domainPct[d], 0) / BODY.domainOrder.length);
+  // слабое звено — минимальный домен
+  const weakest = BODY.domainOrder.reduce((min, d) => (domainPct[d] < domainPct[min] ? d : min), BODY.domainOrder[0]);
+  const band = overall >= 75 ? "high" : overall >= 50 ? "mid" : "low";
+  return { domainPct, overall, weakest, band };
+}
+
+// --- ПСИХИКА ---
+function computePsyche() {
+  const one = (measure) => {
+    const a = STATE.answers.psyche[measure];
+    const pa = PSYCHE.positive.reduce((s, id) => s + (a[id] || 0), 0); // 10..50
+    const na = PSYCHE.negative.reduce((s, id) => s + (a[id] || 0), 0);
+    const { pa: PA_T, na: NA_T } = PSYCHE.thresholds;
+    let q;
+    if (pa >= PA_T && na < NA_T) q = "drive";
+    else if (pa >= PA_T && na >= NA_T) q = "overheat";
+    else if (pa < PA_T && na >= NA_T) q = "anxiety";
+    else q = "calm";
+    return { pa, na, paPct: pct01to100(pa, 10, 50), naPct: pct01to100(na, 10, 50), quadrant: q };
+  };
+  return { now: one("now"), general: one("general") };
+}
+function psycheRough(q) { return q === "anxiety" || q === "overheat"; }
+function psycheGapKey(now, general) {
+  const dPA = now.paPct - general.paPct;
+  const dNA = now.naPct - general.naPct;
+  const worseNow = dPA <= -15 || dNA >= 15;
+  const betterNow = dPA >= 15 || dNA <= -15;
+  const close = Math.abs(dPA) < 12 && Math.abs(dNA) < 12;
+  let key;
+  if (worseNow && !psycheRough(general.quadrant)) key = "gapDip";
+  else if (psycheRough(general.quadrant)) key = "gapBase";
+  else if (betterNow) key = "gapUp";
+  else key = "gapHonest";
+  if (close && !psycheRough(general.quadrant)) key = "gapHonest";
+  return key;
+}
+
+// --- МИР ---
+function computeWorld() {
+  let correct = 0;
+  const review = WORLD.claims.map((c) => {
+    const your = STATE.answers.world[c.id];
+    const ok = your === c.answer;
+    if (ok) correct++;
+    return { id: c.id, your, answer: c.answer, ok };
+  });
+  const pctv = Math.round((correct / WORLD.claims.length) * 100);
+  const band = pctv >= 87 ? "high" : pctv >= 62 ? "mid" : "low";
+  return { correct, total: WORLD.claims.length, pct: pctv, band, review };
+}
+
+/* =========================================================================
+   11. Рендер результатов (HTML-фрагменты)
+   ========================================================================= */
+
+// Карта-квадрант психики (SVG). X — позитивная энергия, Y — напряжение (вверх).
+function psycheChartSVG(now, general) {
+  const W = 320, H = 320, pad = 34;
+  const plot = { x0: pad, y0: H - pad, w: W - pad * 2, h: H - pad * 2 };
+  const px = (p) => plot.x0 + (p / 100) * plot.w;
+  const py = (p) => plot.y0 - (p / 100) * plot.h;
+  const thrX = px(pct01to100(PSYCHE.thresholds.pa, 10, 50));
+  const thrY = py(pct01to100(PSYCHE.thresholds.na, 10, 50));
+  const nx = px(now.paPct), ny = py(now.naPct);
+  const gx = px(general.paPct), gy = py(general.naPct);
+  const q = t("psyche.quadrants");
+  // Цвета под светлую тему (карта на белой карточке)
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("psyche.title")}">
+    <rect x="${plot.x0}" y="${plot.y0 - plot.h}" width="${plot.w}" height="${plot.h}" fill="rgba(237,233,222,0.04)" stroke="rgba(237,233,222,0.20)" rx="6"/>
+    <line x1="${thrX}" y1="${plot.y0 - plot.h}" x2="${thrX}" y2="${plot.y0}" stroke="rgba(237,233,222,0.20)" stroke-dasharray="4 4"/>
+    <line x1="${plot.x0}" y1="${thrY}" x2="${plot.x0 + plot.w}" y2="${thrY}" stroke="rgba(237,233,222,0.20)" stroke-dasharray="4 4"/>
+    <text x="${plot.x0 + 6}" y="${plot.y0 - plot.h + 16}" fill="#BEB9AB" font-size="10">${q.anxiety}</text>
+    <text x="${plot.x0 + plot.w - 6}" y="${plot.y0 - plot.h + 16}" fill="#BEB9AB" font-size="10" text-anchor="end">${q.overheat}</text>
+    <text x="${plot.x0 + 6}" y="${plot.y0 - 8}" fill="#BEB9AB" font-size="10">${q.calm}</text>
+    <text x="${plot.x0 + plot.w - 6}" y="${plot.y0 - 8}" fill="#BEB9AB" font-size="10" text-anchor="end">${q.drive}</text>
+    <text x="${plot.x0 + plot.w / 2}" y="${H - 8}" fill="#8E8A7C" font-size="10" text-anchor="middle">${t("psyche.axisEnergy")}</text>
+    <text x="12" y="${plot.y0 - plot.h / 2}" fill="#8E8A7C" font-size="10" text-anchor="middle" transform="rotate(-90 12 ${plot.y0 - plot.h / 2})">${t("psyche.axisTension")}</text>
+    <line x1="${nx}" y1="${ny}" x2="${gx}" y2="${gy}" stroke="#EDE9DE" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="3 3"/>
+    <circle cx="${gx}" cy="${gy}" r="7" fill="#3E4A40" stroke="#EDE9DE" stroke-width="2"/>
+    <circle cx="${nx}" cy="${ny}" r="7" fill="#C6A96B" stroke="#3E4A40" stroke-width="2"/>
+  </svg>`;
+}
+
+function psycheResultHTML(res) {
+  const { now, general } = res;
+  const q = t("psyche.quadrants");
+  const qd = t("psyche.quadrantDesc");
+  const card = (badgeKey, data) => `
+    <div class="card">
+      <div class="verdict-title"><span class="badge2">${t("psyche." + badgeKey)}</span></div>
+      <div class="big-verdict">${q[data.quadrant]}</div>
+      <p class="verdict-desc">${qd[data.quadrant]}</p>
+      <div class="scores">
+        <div class="score"><div class="k">${t("psyche.scorePA")}</div><div class="v">${data.paPct}%</div></div>
+        <div class="score"><div class="k">${t("psyche.scoreNA")}</div><div class="v">${data.naPct}%</div></div>
+      </div>
+    </div>`;
+  const gapKey = psycheGapKey(now, general);
+  const nextKey = now.quadrant;
+  return `
+    <div class="card chart-wrap">
+      ${psycheChartSVG(now, general)}
+      <div class="legend-dots">
+        <span><i style="background:#C6A96B"></i>${t("psyche.legendNow")}</span>
+        <span><i style="background:#3E4A40;border:1.5px solid #EDE9DE"></i>${t("psyche.legendGeneral")}</span>
+      </div>
+    </div>
+    ${card("badgeNow", now)}
+    ${card("badgeGeneral", general)}
+    <div class="card"><h3 style="margin-bottom:8px">${t("psyche.gapTitle")}</h3><p class="verdict-desc" style="color:var(--text)">${t("psyche." + gapKey)}</p></div>
+    <div class="card next-card"><h3>${t("ui.whatNext")}</h3><p>${t("psyche.nextStep." + nextKey)}</p></div>`;
+}
+
+function bodyResultHTML(res) {
+  const dom = t("body.domains");
+  const bars = BODY.domainOrder.map((d) => {
+    const v = res.domainPct[d];
+    const cls = v >= 67 ? "" : v >= 40 ? "mid" : "low";
+    return `<div class="bar-row">
+      <div class="bar-top"><b>${dom[d]}</b><span>${v}%</span></div>
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${v}%"></div></div>
+    </div>`;
+  }).join("");
+  return `
+    <div class="card">
+      <div class="verdict-title"><span class="badge2">${res.overall}%</span></div>
+      <div class="big-verdict">${t("body.bands." + res.band)}</div>
+      <p class="verdict-desc">${t("body.bandDesc." + res.band)}</p>
+      <div class="bars" style="margin-top:14px">${bars}</div>
+    </div>
+    <div class="card">
+      <div class="badge2" style="color:var(--warn);font-weight:700">${t("body.weakLabel")}: ${dom[res.weakest]}</div>
+      <p class="verdict-desc" style="color:var(--text);margin-top:8px">${t("body.tips." + res.weakest)}</p>
+    </div>
+    <div class="card next-card"><h3>${t("ui.whatNext")}</h3><p>${t("body.nextStep")}</p></div>`;
+}
+
+function worldResultHTML(res) {
+  const vlabel = t("world.verdicts");
+  const items = res.review.map((r) => {
+    const claim = t("world.claims." + r.id + ".text");
+    const expl = t("world.claims." + r.id + ".expl");
+    const line = r.ok
+      ? `<span class="verd">${vlabel[r.answer]}</span>`
+      : `<span class="verd">${t("world.correctLabel")}: ${vlabel[r.answer]}</span> · ${t("world.yourLabel")}: ${vlabel[r.your] || "—"}`;
+    return `<div class="review-item">
+      <span class="rk ${r.ok ? "right" : "wrong"}"></span>
+      <div class="rt"><div class="claim">«${claim}»</div><div class="expl">${line} — ${expl}</div></div>
+    </div>`;
+  }).join("");
+  return `
+    <div class="card">
+      <div class="verdict-title"><span class="badge2">${t("world.scoreLabel")}: ${res.pct}%</span></div>
+      <div class="big-verdict">${t("world.bands." + res.band)}</div>
+      <p class="verdict-desc">${t("world.bandDesc." + res.band)}</p>
+    </div>
+    <div class="card">${items}</div>
+    <div class="card next-card"><h3>${t("ui.whatNext")}</h3><p>${t("world.nextStep")}</p></div>`;
+}
+
+// Одиночный результат
+function renderSingleResult(testId) {
+  document.getElementById("resultEyebrow").textContent = t("ui.resultEyebrowOne");
+  document.getElementById("resultTitle").textContent = t(testId + ".title");
+  let html;
+  if (testId === "body") html = bodyResultHTML(computeBody());
+  else if (testId === "psyche") html = psycheResultHTML(computePsyche());
+  else html = worldResultHTML(computeWorld());
+  document.getElementById("resultBody").innerHTML = html;
+  resetEmailNote();
+}
+
+// Синтез троицы
+function renderCombinedResult() {
+  document.getElementById("resultEyebrow").textContent = t("synth.eyebrow");
+  document.getElementById("resultTitle").textContent = t("synth.title");
+
+  const body = computeBody();
+  const psyche = computePsyche();
+  const world = computeWorld();
+  const cells = t("synth.cells");
+  const q = t("psyche.quadrants");
+
+  const synth = `
+    <div class="card">
+      <div class="synth-grid">
+        <div class="synth-cell"><div class="sc-name">${cells.body}</div><div class="sc-val">${body.overall}%</div></div>
+        <div class="synth-cell"><div class="sc-name">${cells.psyche}</div><div class="sc-val">${q[psyche.now.quadrant]}</div></div>
+        <div class="synth-cell"><div class="sc-name">${cells.world}</div><div class="sc-val">${world.pct}%</div></div>
+      </div>
+      <p class="verdict-desc" style="margin-top:14px">${t("synth.read")}</p>
+    </div>
+    <div class="card next-card"><h3>${t("synth.nextTitle")}</h3><p>${t("synth.next")}</p></div>`;
+
+  // Плюс развёрнутые панели каждого теста
+  const details = `
+    <div style="margin:22px 0 10px"><div class="eyebrow" style="color:var(--muted)">${t("body.title")}</div></div>
+    ${bodyResultHTML(body)}
+    <div style="margin:22px 0 10px"><div class="eyebrow" style="color:var(--muted)">${t("psyche.title")}</div></div>
+    ${psycheResultHTML(psyche)}
+    <div style="margin:22px 0 10px"><div class="eyebrow" style="color:var(--muted)">${t("world.title")}</div></div>
+    ${worldResultHTML(world)}`;
+
+  document.getElementById("resultBody").innerHTML = synth + details;
+  resetEmailNote();
+}
+
+/* =========================================================================
+   12. Почта — сохранение в localStorage (позже заменим на бэкенд)
+   ========================================================================= */
+function currentResultSnapshot() {
+  const snap = {};
+  const ran = new Set(STATE.queue);
+  if (ran.has("body")) snap.body = computeBody();
+  if (ran.has("psyche")) snap.psyche = computePsyche();
+  if (ran.has("world")) snap.world = computeWorld();
+  return snap;
+}
+function saveEmail(email) {
+  let list = [];
+  try { list = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || []; } catch (e) { list = []; }
+  if (list.some((r) => r.email === email)) return "dup";
+  list.push({
+    email,
+    lang: LANG,
+    tests: STATE.queue.slice(),
+    result: currentResultSnapshot(),
+    ts: new Date().toISOString(),
+  });
+  try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(list)); } catch (e) {}
+  return "ok";
+}
+function resetEmailNote() {
+  const note = document.getElementById("emailNote");
+  note.textContent = "";
+  note.className = "email-note";
+}
+function onEmailSubmit(e) {
+  e.preventDefault();
+  const input = document.getElementById("emailInput");
+  const note = document.getElementById("emailNote");
+  const email = input.value.trim();
+  if (!isValidEmail(email)) {
+    note.textContent = t("ui.emailErr");
+    note.className = "email-note err";
+    return;
+  }
+  const res = saveEmail(email);
+  note.textContent = res === "dup" ? t("ui.emailDup") : t("ui.emailOk");
+  note.className = "email-note ok";
+  if (res !== "dup") input.value = "";
+}
+
+/* =========================================================================
+   13. Интро — три двери
+   ========================================================================= */
+const DOOR_ICONS = {
+  // тело — пульс
+  body: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-6 4 12 2-6h6"/></svg>',
+  // психика — квадрант с точкой
+  psyche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M3 12h18M12 3v18" stroke-opacity="0.5"/><circle cx="16" cy="8" r="2.2" fill="currentColor" stroke="none"/></svg>',
+  // мир — глаз/различение
+  world: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+};
+
+function renderDoors() {
+  const order = ["body", "psyche", "world"];
+  const doorsEl = document.getElementById("doors");
+  doorsEl.innerHTML = order.map((id) => {
+    const d = t("doors." + id);
+    return `<button class="door" data-test="${id}">
+      <div class="door-top">
+        <span class="door-ico" aria-hidden="true">${DOOR_ICONS[id]}</span>
+        <div class="door-titles">
+          <div class="door-title">${d.title}</div>
+          <div class="door-tag">${d.tag}</div>
+        </div>
+      </div>
+      <div class="door-desc">${d.desc}</div>
+      <div class="door-cta">${t("ui.startOne")} →</div>
+    </button>`;
+  }).join("");
+
+  doorsEl.querySelectorAll(".door").forEach((b) =>
+    b.addEventListener("click", () => startSession([b.dataset.test], false))
+  );
+}
+
+/* =========================================================================
+   14. Применение TI18N к статичной разметке
+   ========================================================================= */
+function applyStaticI18n() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const v = t(el.getAttribute("data-i18n"));
+    if (typeof v === "string") el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    const v = t(el.getAttribute("data-i18n-html"));
+    if (typeof v === "string") el.innerHTML = v;
+  });
+  document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+    const [attr, key] = el.getAttribute("data-i18n-attr").split(":");
+    el.setAttribute(attr, t(key));
+  });
+}
+
+
+</script>
 <script>
 const I18N={
  ru:{home:"Начало",tag:"Тело · Психика · Мир",hook:'Через 5 минут ты поймёшь, <em>что делать дальше.</em>',frameQuote:'Все продают добавки, страх и надежду. <b>Мы даём ясность.</b>',sysLabel:"Три системы",sysHint:"Выбери одну или пройди всё",c1t:"Тело",c1p:"Сон, вода, питание, движение. Что телу реально нужно, чтобы работать чётко — и как это проверить, а не гадать.",c2t:"Психика",c2p:"Как работает твоя голова: откуда тревога и апатия, как понять своё состояние. Короткий тест-квадрант.",c3t:"Мир",c3p:"Как отличать правду от манипуляции и не дать себя обмануть. Проверь, легко ли тебя провести.",ctaT:"Пройти все три",ctaS:"Тело · Психика · Мир — ~10 минут"},
  ro:{home:"Start",tag:"Corp · Psihic · Lume",hook:'În 5 minute vei înțelege <em>ce ai de făcut.</em>',frameQuote:'Toți vând suplimente, frică și speranță. <b>Noi îți dăm claritate.</b>',sysLabel:"Trei sisteme",sysHint:"Alege unul sau parcurge tot",c1t:"Corp",c1p:"Somn, apă, alimentație, mișcare. De ce are nevoie corpul ca să funcționeze bine — și cum verifici, nu ghicești.",c2t:"Psihic",c2p:"Cum funcționează mintea ta: de unde vin anxietatea și apatia, cum îți înțelegi starea. Un test-cadran scurt.",c3t:"Lume",c3p:"Cum deosebești adevărul de manipulare și nu te lași păcălit. Vezi cât de ușor poți fi indus în eroare.",ctaT:"Fă toate trei",ctaS:"Corp · Psihic · Lume — ~10 minute"},
  en:{home:"Start",tag:"Body · Mind · World",hook:"In 5 minutes you'll know <em>what to do next.</em>",frameQuote:'Everyone sells supplements, fear and hope. <b>We give you clarity.</b>',sysLabel:"Three systems",sysHint:"Pick one or do all three",c1t:"Body",c1p:"Sleep, water, food, movement. What your body actually needs to run clean — and how to check it, not guess.",c2t:"Mind",c2p:"How your head works: where anxiety and flatness come from, how to read your own state. A short quadrant test.",c3t:"World",c3p:"How to tell truth from manipulation and not get played. See how easily you can be misled.",ctaT:"Do all three",ctaS:"Body · Mind · World — ~10 min"}
 };
-function setLang(l){const t=I18N[l];document.documentElement.lang=l;document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined){if(k==='hook'||k==='frameQuote'){el.innerHTML=t[k];}else{el.textContent=t[k];}}});document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));}
-document.querySelectorAll('.langs button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));setLang('ru');
+
+function applyTemplateLang(l){const tt=I18N[l];if(!tt)return;document.documentElement.lang=l;document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(tt[k]!==undefined){if(k==='hook'||k==='frameQuote'){el.innerHTML=tt[k];}else{el.textContent=tt[k];}}});}
+function setLang(l){LANG=l;applyTemplateLang(l);applyStaticI18n();const s=activeScreenId();if(s==='test')renderStep();if(s==='result'){STATE.combined?renderCombinedResult():renderSingleResult(STATE.queue[STATE.testIndex]);}document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));}
+document.querySelectorAll('.langs button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+document.querySelectorAll('.item[data-test]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();startSession([a.dataset.test],false);}));
+var _cta=document.querySelector('.cta a');if(_cta)_cta.addEventListener('click',function(e){e.preventDefault();startSession(['body','psyche','world'],true);});
+var _back=document.getElementById('backBtn');if(_back)_back.addEventListener('click',goBack);
+var _more=document.getElementById('moreBtn');if(_more)_more.addEventListener('click',function(){showScreen('home');});
+var _ef=document.getElementById('emailForm');if(_ef)_ef.addEventListener('submit',onEmailSubmit);
+var _mk=document.querySelector('.mark');if(_mk)_mk.addEventListener('click',function(){showScreen('home');});
+setLang('ru');
+
 </script>
 </body>
 </html>
