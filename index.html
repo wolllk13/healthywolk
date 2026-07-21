@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthyWolk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#3E4A40;
+  --bg-2:#46534A;
+  --cream:#EDE9DE;
+  --cream-soft:rgba(237,233,222,.66);
+  --cream-faint:rgba(237,233,222,.34);
+  --gold:#C6A96B;
+  --hair:rgba(237,233,222,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Spline Sans Mono',monospace;background:var(--bg);color:var(--cream);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;background-image:radial-gradient(130% 90% at 50% 8%,var(--bg-2),transparent 55%);}
+.mono{font-family:'Spline Sans Mono',monospace;letter-spacing:.14em;text-transform:uppercase;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 44px;}
+
+/* top bar */
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:26px 0;}
+.mark{width:52px;height:52px;display:flex;align-items:center;justify-content:center;color:var(--cream);}
+.mark img{width:100%;height:100%;object-fit:contain;}
+.mark svg{width:30px;height:30px;}
+.top .center{justify-self:center;display:flex;align-items:center;gap:14px;color:var(--cream-soft);font-size:12px;}
+.top .center .num{width:34px;height:34px;border:1px solid var(--hair);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.langs{justify-self:end;display:flex;gap:16px;}
+.langs button{font-family:'Spline Sans Mono';font-size:12px;letter-spacing:.14em;border:none;background:none;color:var(--cream-faint);cursor:pointer;padding:4px 0;transition:color .2s;}
+.langs button.on{color:var(--cream);}
+
+/* hero */
+.hero{text-align:center;padding:64px 0 60px;}
+.brandbig{font-family:'Fraunces';font-weight:300;font-size:clamp(52px,10vw,150px);line-height:.9;letter-spacing:-.03em;}
+.brandbig .w2{color:var(--cream);font-style:italic;font-weight:400;}
+.tagline{margin-top:40px;color:var(--cream-soft);letter-spacing:.28em;font-size:clamp(14px,1.7vw,18px);}
+.hook{margin:44px auto 0;max-width:18em;font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(30px,4.6vw,56px);line-height:1.2;color:var(--cream);letter-spacing:-.015em;}
+.hook em{color:var(--gold);font-style:italic;}
+
+/* quote frame */
+.frame{margin:60px 0 0;min-height:200px;border-radius:6px;background:linear-gradient(160deg,rgba(198,169,107,.20),rgba(237,233,222,.08) 55%,rgba(62,74,64,.18));border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;padding:48px 40px;}
+.frame p{font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(22px,3vw,38px);line-height:1.32;letter-spacing:-.01em;max-width:20em;text-align:center;}
+.frame p b{font-style:normal;font-weight:400;color:var(--gold);}
+
+/* systems */
+.systems{padding:96px 0 110px;}
+.sys-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--hair);padding-bottom:18px;margin-bottom:6px;gap:16px;}
+.sys-top .lbl{color:var(--cream);font-size:13px;}
+.sys-top .hint{color:var(--cream-soft);text-transform:none;letter-spacing:0;font-size:14px;text-align:right;}
+.item{display:grid;grid-template-columns:60px 1fr 40px;gap:34px;align-items:center;padding:42px 0;border-bottom:1px solid var(--hair);text-decoration:none;color:inherit;transition:padding-left .3s cubic-bezier(.2,.7,.2,1);}
+.item:hover{padding-left:12px;}
+.item .idx{color:var(--gold);font-size:15px;}
+.item h3{font-family:'Fraunces';font-weight:300;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;line-height:1;margin-bottom:14px;}
+.item p{font-family:'Spline Sans Mono';font-size:16px;color:var(--cream-soft);line-height:1.7;max-width:44em;letter-spacing:0;text-transform:none;}
+.item .arw{justify-self:end;color:var(--cream);transition:transform .3s ease;}
+.item:hover .arw{transform:translateX(6px);}
+.cta{margin-top:64px;text-align:center;}
+.cta a{text-decoration:none;color:var(--cream);}
+.cta .t{font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(28px,3.6vw,42px);border-bottom:1px solid var(--gold);padding-bottom:14px;transition:color .25s ease;}
+.cta a:hover .t{color:var(--gold);}
+.cta .s{display:block;margin-top:20px;color:var(--cream-soft);font-size:13px;}
+
+.fade{opacity:0;transform:translateY(16px);animation:up 1s cubic-bezier(.2,.7,.2,1) forwards;}
+.d1{animation-delay:.05s;}.d2{animation-delay:.18s;}.d3{animation-delay:.32s;}.d4{animation-delay:.46s;}
+@keyframes up{to{opacity:1;transform:none;}}
+
+@media (max-width:760px){
+  .wrap{padding:0 22px;}
+  .top{grid-template-columns:auto 1fr;padding:20px 0;}
+  .top .center{display:none;}
+  .mark{width:44px;height:44px;}
+  .hero{padding:40px 0 40px;}
+  .tagline{font-size:14px;letter-spacing:.2em;}
+  .hook{font-size:clamp(28px,8vw,40px);margin-top:34px;}
+  .frame{min-height:160px;padding:36px 24px;}
+  .frame p{font-size:22px;}
+  .item{grid-template-columns:30px 1fr 22px;gap:14px;padding:34px 0;}
+  .item h3{font-size:30px;}
+  .item p{font-size:16px;line-height:1.7;}
+  .sys-top .hint{font-size:12px;}
+}
+@media (prefers-reduced-motion:reduce){.fade{animation:none;opacity:1;transform:none;}}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="mark">
+      <!-- WOLF LOGO: замени на прозрачный PNG. Назови файл wolf.png и положи рядом -->
+      <img src="wolf.png" alt="HealthyWolk" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <svg style="display:none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"><path d="M28 40 Q19 23 25 12 Q34 21 43 21 L57 21 Q66 21 75 12 Q81 23 72 40 Q81 55 72 71 L50 88 L28 71 Q19 55 28 40 Z"/><path d="M37 47 Q43 43 48 48"/><path d="M63 47 Q57 43 52 48"/><path d="M50 60 L44 69 Q50 74 56 69 Z"/></svg>
+    </div>
+    <div class="center mono"><span class="num">01</span><span data-t="home">Начало</span></div>
+    <div class="langs mono"><button data-lang="ru" class="on">RU</button><button data-lang="ro">RO</button><button data-lang="en">EN</button></div>
+  </div>
+
+  <section class="hero">
+    <div class="brandbig fade d1">Healthy<span class="w2">Wolk</span></div>
+    <div class="tagline mono fade d2" data-t="tag">Тело · Психика · Мир</div>
+    <p class="hook fade d3" data-t="hook"></p>
+    <div class="frame fade d4"><p data-t="frameQuote"></p></div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="systems">
+    <div class="sys-top">
+      <div class="mono lbl" data-t="sysLabel">Три системы</div>
+      <div class="hint" data-t="sysHint">Выбери одну или пройди всё</div>
+    </div>
+    <a href="#" class="item"><div class="idx">01</div><div><h3 data-t="c1t">Тело</h3><p data-t="c1p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#" class="item"><div class="idx">02</div><div><h3 data-t="c2t">Психика</h3><p data-t="c2p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a href="#" class="item"><div class="idx">03</div><div><h3 data-t="c3t">Мир</h3><p data-t="c3p"></p></div><svg class="arw" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="cta"><a href="#"><span class="t" data-t="ctaT">Пройти все три</span><span class="s mono" data-t="ctaS">Тело · Психика · Мир — ~10 минут</span></a></div>
+  </section>
+</div>
+<script>
+const I18N={
+ ru:{home:"Начало",tag:"Тело · Психика · Мир",hook:'Через 5 минут ты поймёшь, <em>что делать дальше.</em>',frameQuote:'Все продают добавки, страх и надежду. <b>Мы даём ясность.</b>',sysLabel:"Три системы",sysHint:"Выбери одну или пройди всё",c1t:"Тело",c1p:"Сон, вода, питание, движение. Что телу реально нужно, чтобы работать чётко — и как это проверить, а не гадать.",c2t:"Психика",c2p:"Как работает твоя голова: откуда тревога и апатия, как понять своё состояние. Короткий тест-квадрант.",c3t:"Мир",c3p:"Как отличать правду от манипуляции и не дать себя обмануть. Проверь, легко ли тебя провести.",ctaT:"Пройти все три",ctaS:"Тело · Психика · Мир — ~10 минут"},
+ ro:{home:"Start",tag:"Corp · Psihic · Lume",hook:'În 5 minute vei înțelege <em>ce ai de făcut.</em>',frameQuote:'Toți vând suplimente, frică și speranță. <b>Noi îți dăm claritate.</b>',sysLabel:"Trei sisteme",sysHint:"Alege unul sau parcurge tot",c1t:"Corp",c1p:"Somn, apă, alimentație, mișcare. De ce are nevoie corpul ca să funcționeze bine — și cum verifici, nu ghicești.",c2t:"Psihic",c2p:"Cum funcționează mintea ta: de unde vin anxietatea și apatia, cum îți înțelegi starea. Un test-cadran scurt.",c3t:"Lume",c3p:"Cum deosebești adevărul de manipulare și nu te lași păcălit. Vezi cât de ușor poți fi indus în eroare.",ctaT:"Fă toate trei",ctaS:"Corp · Psihic · Lume — ~10 minute"},
+ en:{home:"Start",tag:"Body · Mind · World",hook:"In 5 minutes you'll know <em>what to do next.</em>",frameQuote:'Everyone sells supplements, fear and hope. <b>We give you clarity.</b>',sysLabel:"Three systems",sysHint:"Pick one or do all three",c1t:"Body",c1p:"Sleep, water, food, movement. What your body actually needs to run clean — and how to check it, not guess.",c2t:"Mind",c2p:"How your head works: where anxiety and flatness come from, how to read your own state. A short quadrant test.",c3t:"World",c3p:"How to tell truth from manipulation and not get played. See how easily you can be misled.",ctaT:"Do all three",ctaS:"Body · Mind · World — ~10 min"}
+};
+function setLang(l){const t=I18N[l];document.documentElement.lang=l;document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(t[k]!==undefined){if(k==='hook'||k==='frameQuote'){el.innerHTML=t[k];}else{el.textContent=t[k];}}});document.querySelectorAll('.langs button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));}
+document.querySelectorAll('.langs button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));setLang('ru');
+</script>
+</body>
+</html>

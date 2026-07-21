@@ -1,0 +1,11 @@
+.venv/
+*.pdf
+*.b64
+*-backup.html
+healthywolk-A-final.html
+волк*.jpg
+variants.html
+main.py
+probe_*
+*.png
+!wolf.png
