@@ -1338,6 +1338,28 @@ function resetEmailNote() {
   note.textContent = "";
   note.className = "email-note";
 }
+// Web3Forms — заявки приходят на почту владельца (ключ публичный по дизайну сервиса)
+const WEB3FORMS_KEY = "41b4a298-0a04-4abf-ba4a-28c3770ebb61";
+function submitLead(email) {
+  const snap = currentResultSnapshot();
+  let summary = "Заявка с myhealthywolf.com\n";
+  summary += "Тесты: " + (STATE.queue.join(", ") || "—") + "\n";
+  summary += "Язык: " + LANG + "\n";
+  if (snap.body)   summary += "Тело: " + snap.body.overall + "% (слабое звено: " + snap.body.weakest + ")\n";
+  if (snap.psyche) summary += "Психика: сейчас=" + snap.psyche.now.quadrant + " / обычно=" + snap.psyche.general.quadrant + "\n";
+  if (snap.world)  summary += "Мир: " + snap.world.pct + "% (" + snap.world.correct + "/" + snap.world.total + ")\n";
+  return fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: "HealthyWolf — новая заявка на разбор",
+      from_name: "HealthyWolf",
+      email: email,           // почта посетителя (reply-to)
+      message: summary,
+    }),
+  });
+}
 function onEmailSubmit(e) {
   e.preventDefault();
   const input = document.getElementById("emailInput");
@@ -1348,10 +1370,13 @@ function onEmailSubmit(e) {
     note.className = "email-note err";
     return;
   }
-  const res = saveEmail(email);
+  const res = saveEmail(email);            // локальный бэкап
+  if (res !== "dup") {
+    submitLead(email).catch(() => {});     // отправка владельцу на почту
+    input.value = "";
+  }
   note.textContent = res === "dup" ? t("ui.emailDup") : t("ui.emailOk");
   note.className = "email-note ok";
-  if (res !== "dup") input.value = "";
 }
 
 /* =========================================================================
