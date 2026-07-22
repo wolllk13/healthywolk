@@ -1348,17 +1348,14 @@ function submitLead(email) {
   if (snap.body)   summary += "Тело: " + snap.body.overall + "% (слабое звено: " + snap.body.weakest + ")\n";
   if (snap.psyche) summary += "Психика: сейчас=" + snap.psyche.now.quadrant + " / обычно=" + snap.psyche.general.quadrant + "\n";
   if (snap.world)  summary += "Мир: " + snap.world.pct + "% (" + snap.world.correct + "/" + snap.world.total + ")\n";
-  return fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Accept": "application/json" },
-    body: JSON.stringify({
-      access_key: WEB3FORMS_KEY,
-      subject: "HealthyWolf — новая заявка на разбор",
-      from_name: "HealthyWolf",
-      email: email,           // почта посетителя (reply-to)
-      message: summary,
-    }),
-  });
+  // FormData -> «простой» запрос без CORS-preflight (надёжнее всего для Web3Forms)
+  const fd = new FormData();
+  fd.append("access_key", WEB3FORMS_KEY);
+  fd.append("subject", "HealthyWolf — новая заявка на разбор");
+  fd.append("from_name", "HealthyWolf");
+  fd.append("email", email);   // почта посетителя (reply-to)
+  fd.append("message", summary);
+  return fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
 }
 function onEmailSubmit(e) {
   e.preventDefault();
