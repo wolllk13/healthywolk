@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Тест состояния — HealthyWolf</title>
+<!-- ANALYTICS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/test/funnel.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/"><span class="mark"><img src="/wolf.png" alt="HealthyWolf"></span><span class="name" data-t="brand"></span></a>
+    <div class="langs"><button data-lang="ru" class="on">RU</button><button data-lang="en">EN</button></div>
+  </div>
+
+  <div class="quiz-top">
+    <div class="quiz-meta"><span class="layer" id="layer"></span><span class="count" id="count"></span></div>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+
+  <div class="q-stage">
+    <div class="q-frame" id="frame"></div>
+    <div class="q-word serif" id="word"></div>
+    <div class="q-hint" id="hint"></div>
+  </div>
+
+  <div>
+    <div class="scale" id="scale"></div>
+    <div class="scale-legend"><span id="legLow"></span><span id="legHigh"></span></div>
+    <button class="quiz-back" id="back"></button>
+  </div>
+</div>
+
+<script src="/test/content.js"></script>
+<script>
+var LANG = HW.getLang();
+
+// перемешивание (Фишер–Йейтс)
+function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+// строим 24 шага: слой "now" (12) + слой "general" (12), внутри слоя порядок перемешан
+function buildSteps() {
+  var steps = [];
+  ["now", "general"].forEach(function (layer) {
+    var items = shuffle([].concat(
+      HW.items.positive.map(function (id) { return { id: id, pol: "pos" }; }),
+      HW.items.negative.map(function (id) { return { id: id, pol: "neg" }; })
+    ));
+    items.forEach(function (it) { steps.push({ layer: layer, id: it.id, pol: it.pol }); });
+  });
+  return steps;
+}
+var STATE = { steps: buildSteps(), i: 0, ans: { now: {}, general: {} } };
+var N = STATE.steps.length;
+
+function renderStep() {
+  var u = HW.ui[LANG];
+  var s = STATE.steps[STATE.i];
+  document.getElementById("layer").textContent = s.layer === "now" ? u.layerNow : u.layerGeneral;
+  document.getElementById("count").textContent = u.countTpl.replace("{i}", STATE.i + 1).replace("{n}", N);
+  document.getElementById("bar").style.width = (STATE.i / N) * 100 + "%";
+  document.getElementById("frame").textContent = s.layer === "now" ? u.frameNow : u.frameGeneral;
+  document.getElementById("word").textContent = HW.labels[LANG][s.id];
+  document.getElementById("hint").textContent = u.hint;
+  document.getElementById("legLow").textContent = u.low;
+  document.getElementById("legHigh").textContent = u.high;
+  document.getElementById("back").textContent = u.back;
+
+  var prev = STATE.ans[s.layer][s.id];
+  var scale = document.getElementById("scale");
+  scale.innerHTML = "";
+  for (var v = 1; v <= 5; v++) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = v;
+    if (prev === v) b.style.borderColor = "var(--gold)";
+    (function (val) { b.addEventListener("click", function () { answer(val); }); })(v);
+    scale.appendChild(b);
+  }
+  document.querySelectorAll(".langs button").forEach(function (x) { x.classList.toggle("on", x.dataset.lang === LANG); });
+  document.documentElement.lang = LANG;
+  document.getElementById("back").style.visibility = STATE.i === 0 ? "hidden" : "visible";
+}
+
+function answer(v) {
+  var s = STATE.steps[STATE.i];
+  STATE.ans[s.layer][s.id] = v;
+  if (STATE.i < N - 1) { STATE.i++; renderStep(); }
+  else finish();
+}
+function goBack() { if (STATE.i > 0) { STATE.i--; renderStep(); } }
+
+function sum(layer, pol) {
+  var ids = pol === "pos" ? HW.items.positive : HW.items.negative;
+  return ids.reduce(function (acc, id) { return acc + (STATE.ans[layer][id] || 0); }, 0);
+}
+function finish() {
+  var pa_state = sum("now", "pos"), na_state = sum("now", "neg");
+  var pa_trait = sum("general", "pos"), na_trait = sum("general", "neg");
+  var result = {
+    type: HW.quadrant(pa_trait, na_trait),        // тип по «обычно» (trait)
+    state_type: HW.quadrant(pa_state, na_state),  // тип по «сейчас» (state)
+    pa_state: pa_state, na_state: na_state, pa_trait: pa_trait, na_trait: na_trait,
+    date: new Date().toISOString(),
+  };
+  try { localStorage.setItem(HW.LS_RESULT, JSON.stringify(result)); } catch (e) {}
+  document.getElementById("bar").style.width = "100%";
+  location.href = "/test/result/";
+}
+
+document.getElementById("back").addEventListener("click", goBack);
+document.querySelectorAll(".langs button").forEach(function (b) {
+  b.addEventListener("click", function () { LANG = b.dataset.lang; HW.setLang(LANG); renderStep(); });
+});
+renderStep();
+</script>
+</body>
+</html>

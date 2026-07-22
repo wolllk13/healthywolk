@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест состояния — в каком из 4 ты живёшь? | HealthyWolf</title>
+<meta name="description" content="За 1 минуту узнай своё состояние по 4 типам: Драйв, Перегрев, Тревога, Затишье. 12 вопросов, бесплатно, без регистрации.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myhealthywolf.com/test/">
+<meta property="og:title" content="В каком из 4 состояний ты живёшь? — HealthyWolf">
+<meta property="og:description" content="Тест на 1 минуту. 12 вопросов. Бесплатно, без регистрации.">
+<meta property="og:image" content="https://myhealthywolf.com/wolf.png">
+<meta name="twitter:card" content="summary_large_image">
+<!-- ANALYTICS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/test/funnel.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/">
+      <span class="mark"><img src="/wolf.png" alt="HealthyWolf"></span>
+      <span class="name" data-t="brand"></span>
+    </a>
+    <div class="langs">
+      <button data-lang="ru" class="on">RU</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow fade d1" data-t="eyebrow"></div>
+    <h1 class="fade d1" data-t="h1"></h1>
+    <p class="sub fade d2" data-t="sub"></p>
+    <div class="hero-cta fade d3"><a class="btn" href="/test/quiz/" data-t="startBtn"></a></div>
+    <div class="hero-note fade d3" data-t="startNote"></div>
+  </section>
+
+  <section class="section fade d4">
+    <div class="section-lbl" data-t="typesLbl"></div>
+    <div class="quadrant-box">
+      <div class="quadrant">
+        <div class="q-axis-y" data-t="axisY"></div>
+        <div class="q-label q-tl" data-type="anxiety"></div>
+        <div class="q-label q-tr" data-type="overheat"></div>
+        <div class="q-label q-bl" data-type="calm"></div>
+        <div class="q-label q-br" data-type="drive"></div>
+      </div>
+      <div class="q-axis-x" data-t="axisX"></div>
+    </div>
+    <div class="types" id="typeCards"></div>
+  </section>
+
+  <footer>
+    <div class="fbrand" data-t="footerBrand"></div>
+    <div class="fnote" data-t="disclaimer"></div>
+  </footer>
+</div>
+
+<script src="/test/content.js"></script>
+<script>
+var LANG = HW.getLang();
+function render() {
+  var u = HW.ui[LANG];
+  document.querySelectorAll("[data-t]").forEach(function (el) {
+    var k = el.getAttribute("data-t");
+    if (u[k] == null) return;
+    if (k === "h1" || k === "sub" || k === "brand" || k === "footerBrand") el.innerHTML = u[k];
+    else el.textContent = u[k];
+  });
+  document.querySelectorAll(".q-label[data-type]").forEach(function (el) {
+    el.textContent = HW.types[LANG][el.dataset.type].name;
+  });
+  var order = ["drive", "overheat", "anxiety", "calm"];
+  document.getElementById("typeCards").innerHTML = order.map(function (id) {
+    var ty = HW.types[LANG][id];
+    return '<div class="type-mini"><h4>' + ty.name + '</h4><div class="tag">' + ty.tag + '</div><p>' + ty.short + "</p></div>";
+  }).join("");
+  document.querySelectorAll(".langs button").forEach(function (b) { b.classList.toggle("on", b.dataset.lang === LANG); });
+  document.documentElement.lang = LANG;
+}
+document.querySelectorAll(".langs button").forEach(function (b) {
+  b.addEventListener("click", function () { LANG = b.dataset.lang; HW.setLang(LANG); render(); });
+});
+render();
+</script>
+</body>
+</html>

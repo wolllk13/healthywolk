@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Твой результат — HealthyWolf</title>
+<!-- ANALYTICS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/test/funnel.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/"><span class="mark"><img src="/wolf.png" alt="HealthyWolf"></span><span class="name" data-t="brand"></span></a>
+    <div class="langs"><button data-lang="ru" class="on">RU</button><button data-lang="en">EN</button></div>
+  </div>
+
+  <section class="result-hero">
+    <div class="eyebrow" data-t="resEyebrow"></div>
+    <h1 id="typeName"></h1>
+    <p class="type-desc" id="typeShort"></p>
+    <div class="result-scores">
+      <div class="s"><div class="k" data-t="scorePA"></div><div class="v" id="paVal"></div></div>
+      <div class="s"><div class="k" data-t="scoreNA"></div><div class="v" id="naVal"></div></div>
+    </div>
+  </section>
+
+  <div class="quadrant-box">
+    <div class="quadrant" id="quadrant">
+      <div class="q-axis-y" data-t="axisY"></div>
+      <div class="q-label q-tl" data-type="anxiety"></div>
+      <div class="q-label q-tr" data-type="overheat"></div>
+      <div class="q-label q-bl" data-type="calm"></div>
+      <div class="q-label q-br" data-type="drive"></div>
+    </div>
+    <div class="q-axis-x" data-t="axisX"></div>
+    <div class="legend-dots" style="display:flex;gap:18px;justify-content:center;margin-top:14px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--cream-soft)">
+      <span><i style="display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--gold);vertical-align:middle;margin-right:6px"></i><span data-t="legendUsual"></span></span>
+      <span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--bg);border:1.5px solid var(--cream);vertical-align:middle;margin-right:6px"></i><span data-t="legendNow"></span></span>
+    </div>
+  </div>
+
+  <!-- email-гейт: полный разбор под блюром -->
+  <div class="gate" id="gate">
+    <div class="gate-head">
+      <h2 data-t="gateTitle"></h2>
+      <p data-t="gateSub"></p>
+    </div>
+
+    <div class="email-gate-zone">
+      <form class="email-form" id="emailForm" novalidate>
+        <input type="email" id="email" data-tph="emailPh" autocomplete="email" inputmode="email">
+        <button class="btn btn-full" type="submit" data-t="emailBtn"></button>
+      </form>
+      <div class="email-note" id="note"></div>
+
+      <!-- ▼▼▼ СЮДА вставить embed-коды форм systeme.io по каждому типу (заменить комментарий) ▼▼▼ -->
+      <div class="embed-slot" data-type="drive" hidden><!-- SYSTEME_IO_EMBED_DRIVE --></div>
+      <div class="embed-slot" data-type="overheat" hidden><!-- SYSTEME_IO_EMBED_OVERHEAT --></div>
+      <div class="embed-slot" data-type="anxiety" hidden><!-- SYSTEME_IO_EMBED_ANXIETY --></div>
+      <div class="embed-slot" data-type="calm" hidden><!-- SYSTEME_IO_EMBED_CALM --></div>
+      <!-- ▲▲▲ пока embed не вставлен — работает заглушка выше (поле email) ▲▲▲ -->
+    </div>
+
+    <div class="locked">
+      <div class="blurred full-breakdown" id="breakdown"></div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn btn-ghost" id="share" data-t="shareBtn"></button>
+    <a class="btn btn-ghost" href="/test/" data-t="retake"></a>
+    <a class="btn btn-ghost" href="/" data-t="toHome"></a>
+  </div>
+
+  <footer>
+    <div class="fbrand" data-t="footerBrand"></div>
+    <div class="fnote" data-t="disclaimer"></div>
+  </footer>
+</div>
+
+<script src="/test/content.js"></script>
+<script>
+var LANG = HW.getLang();
+
+// читаем результат; нет — назад на лендинг
+var R;
+try { R = JSON.parse(localStorage.getItem(HW.LS_RESULT)); } catch (e) {}
+if (!R || !R.type) { location.replace("/test/"); }
+
+function esc(s) { return s; }
+function render() {
+  if (!R) return;
+  var u = HW.ui[LANG], ty = HW.types[LANG][R.type];
+
+  document.querySelectorAll("[data-t]").forEach(function (el) {
+    var k = el.getAttribute("data-t"); if (u[k] == null) return;
+    if (k === "brand" || k === "footerBrand") el.innerHTML = u[k]; else el.textContent = u[k];
+  });
+  document.querySelectorAll("[data-tph]").forEach(function (el) { el.setAttribute("placeholder", u[el.getAttribute("data-tph")]); });
+
+  // тип
+  document.getElementById("typeName").textContent = ty.name;
+  document.getElementById("typeShort").textContent = ty.short;
+  document.getElementById("paVal").textContent = R.pa_trait;
+  document.getElementById("naVal").textContent = R.na_trait;
+
+  // углы квадранта + подсветка активного
+  document.querySelectorAll(".q-label[data-type]").forEach(function (el) {
+    el.textContent = HW.types[LANG][el.dataset.type].name;
+    el.classList.toggle("active", el.dataset.type === R.type);
+  });
+  // точки: обычно (trait, золотая) + сейчас (state, кремовая)
+  var q = document.getElementById("quadrant");
+  q.querySelectorAll(".q-point").forEach(function (p) { p.remove(); });
+  addPoint(q, R.pa_trait, R.na_trait, "");
+  addPoint(q, R.pa_state, R.na_state, "state");
+
+  // полный разбор (под блюром до email)
+  var steps = ty.steps.map(function (s) { return "<li>" + s + "</li>"; }).join("");
+  var compare = R.state_type === R.type
+    ? u.compareSame.replace("{t}", ty.name)
+    : u.compareDiff.replace("{s}", HW.types[LANG][R.state_type].name).replace("{t}", ty.name);
+  document.getElementById("breakdown").innerHTML =
+    "<h3>" + u.headMeaning + "</h3><p>" + ty.meaning + "</p>" +
+    "<h3>" + u.headTrap + "</h3><p>" + ty.trap + "</p>" +
+    "<h3>" + u.headSteps + "</h3><ol>" + steps + "</ol>" +
+    "<h3>" + u.headCompare + "</h3><p>" + compare + "</p>";
+
+  document.querySelectorAll(".langs button").forEach(function (b) { b.classList.toggle("on", b.dataset.lang === LANG); });
+  document.documentElement.lang = LANG;
+
+  applyGateState();
+}
+function addPoint(q, pa, na, cls) {
+  var p = document.createElement("div");
+  p.className = "q-point" + (cls ? " " + cls : "");
+  p.style.left = HW.pct(pa) + "%";
+  p.style.top = (100 - HW.pct(na)) + "%";
+  q.appendChild(p);
+}
+
+// показать нужный systeme.io embed по типу; если его нет — оставить заглушку
+function applyGateState() {
+  var slot = document.querySelector('.embed-slot[data-type="' + R.type + '"]');
+  var hasEmbed = slot && slot.querySelector("*"); // вставлен реальный контент, не только комментарий
+  var stubForm = document.getElementById("emailForm");
+  if (hasEmbed) { slot.hidden = false; stubForm.style.display = "none"; }
+  // разблокировка, если уже оставляли почту
+  var unlocked = false;
+  try { unlocked = localStorage.getItem("hw_unlocked") === "1"; } catch (e) {}
+  if (unlocked) document.getElementById("gate").classList.add("unlocked");
+}
+
+function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || "").trim()); }
+document.getElementById("emailForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var u = HW.ui[LANG];
+  var input = document.getElementById("email"), note = document.getElementById("note");
+  var email = input.value.trim();
+  if (!isEmail(email)) { note.textContent = u.emailErr; note.className = "email-note err"; return; }
+  // заглушка: сохраняем лид локально + разблокируем разбор (позже заменят на systeme.io)
+  try {
+    var leads = JSON.parse(localStorage.getItem(HW.LS_LEADS)) || [];
+    leads.push({ email: email, type: R.type, date: new Date().toISOString() });
+    localStorage.setItem(HW.LS_LEADS, JSON.stringify(leads));
+    localStorage.setItem("hw_unlocked", "1");
+  } catch (er) {}
+  note.textContent = u.emailOk; note.className = "email-note ok";
+  document.getElementById("gate").classList.add("unlocked");
+});
+
+document.getElementById("share").addEventListener("click", function () {
+  var u = HW.ui[LANG], ty = HW.types[LANG][R.type];
+  var text = (LANG === "ru" ? "Моё состояние: " : "My state: ") + ty.name + " — " + location.origin + "/test/";
+  var done = function () { var s = document.getElementById("share"); var o = s.textContent; s.textContent = u.shareCopied; setTimeout(function () { s.textContent = o; }, 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done); else done();
+});
+
+document.querySelectorAll(".langs button").forEach(function (b) {
+  b.addEventListener("click", function () { LANG = b.dataset.lang; HW.setLang(LANG); render(); });
+});
+render();
+</script>
+</body>
+</html>

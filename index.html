@@ -64,6 +64,12 @@ body{font-family:'Spline Sans Mono',monospace;background:var(--bg);color:var(--c
 .cta .t{font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(28px,3.6vw,42px);border-bottom:1px solid var(--gold);padding-bottom:14px;transition:color .25s ease;}
 .cta a:hover .t{color:var(--gold);}
 .cta .s{display:block;margin-top:20px;color:var(--cream-soft);font-size:13px;}
+.test-banner{margin-top:52px;}
+.test-banner a{display:block;text-align:center;border:1px solid var(--gold);border-radius:8px;padding:26px 24px;text-decoration:none;transition:background .2s;}
+.test-banner a:hover{background:rgba(198,169,107,.1);}
+.test-banner .tb-eyebrow{display:block;font-family:'Spline Sans Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.test-banner .tb-title{font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(22px,4.6vw,32px);line-height:1.2;color:var(--cream);}
+.test-banner .tb-title .arw{font-style:normal;color:var(--gold);}
 
 .fade{opacity:0;transform:translateY(16px);animation:up 1s cubic-bezier(.2,.7,.2,1) forwards;}
 .d1{animation-delay:.05s;}.d2{animation-delay:.18s;}.d3{animation-delay:.32s;}.d4{animation-delay:.46s;}
@@ -203,6 +209,12 @@ body{font-family:'Spline Sans Mono',monospace;background:var(--bg);color:var(--c
     <div class="tagline mono fade d2" data-t="tag">Тело · Психика · Мир</div>
     <p class="hook fade d3" data-t="hook"></p>
     <div class="frame fade d4"><p data-t="frameQuote"></p></div>
+    <div class="test-banner fade d4">
+      <a href="/test/">
+        <span class="tb-eyebrow" data-t="testCtaSub"></span>
+        <span class="tb-title"><span data-t="testCta"></span> <span class="arw">→</span></span>
+      </a>
+    </div>
   </section>
 </div>
 
@@ -1433,9 +1445,9 @@ function applyStaticI18n() {
 </script>
 <script>
 const I18N={
- ru:{home:"Начало",tag:"Тело · Психика · Мир",hook:'Через 5 минут ты поймёшь, <em>что делать дальше.</em>',frameQuote:'Все продают добавки, страх и надежду. <b>Мы даём ясность.</b>',sysLabel:"Три системы",sysHint:"Выбери одну или пройди всё",c1t:"Тело",c1p:"Сон, вода, питание, движение. Что телу реально нужно, чтобы работать чётко — и как это проверить, а не гадать.",c2t:"Психика",c2p:"Как работает твоя голова: откуда тревога и апатия, как понять своё состояние. Короткий тест-квадрант.",c3t:"Мир",c3p:"Как отличать правду от манипуляции и не дать себя обмануть. Проверь, легко ли тебя провести.",ctaT:"Пройти все три",ctaS:"Тело · Психика · Мир — ~10 минут"},
- ro:{home:"Start",tag:"Corp · Psihic · Lume",hook:'În 5 minute vei înțelege <em>ce ai de făcut.</em>',frameQuote:'Toți vând suplimente, frică și speranță. <b>Noi îți dăm claritate.</b>',sysLabel:"Trei sisteme",sysHint:"Alege unul sau parcurge tot",c1t:"Corp",c1p:"Somn, apă, alimentație, mișcare. De ce are nevoie corpul ca să funcționeze bine — și cum verifici, nu ghicești.",c2t:"Psihic",c2p:"Cum funcționează mintea ta: de unde vin anxietatea și apatia, cum îți înțelegi starea. Un test-cadran scurt.",c3t:"Lume",c3p:"Cum deosebești adevărul de manipulare și nu te lași păcălit. Vezi cât de ușor poți fi indus în eroare.",ctaT:"Fă toate trei",ctaS:"Corp · Psihic · Lume — ~10 minute"},
- en:{home:"Start",tag:"Body · Mind · World",hook:"In 5 minutes you'll know <em>what to do next.</em>",frameQuote:'Everyone sells supplements, fear and hope. <b>We give you clarity.</b>',sysLabel:"Three systems",sysHint:"Pick one or do all three",c1t:"Body",c1p:"Sleep, water, food, movement. What your body actually needs to run clean — and how to check it, not guess.",c2t:"Mind",c2p:"How your head works: where anxiety and flatness come from, how to read your own state. A short quadrant test.",c3t:"World",c3p:"How to tell truth from manipulation and not get played. See how easily you can be misled.",ctaT:"Do all three",ctaS:"Body · Mind · World — ~10 min"}
+ ru:{home:"Начало",tag:"Тело · Психика · Мир",hook:'Через 5 минут ты поймёшь, <em>что делать дальше.</em>',frameQuote:'Все продают добавки, страх и надежду. <b>Мы даём ясность.</b>',sysLabel:"Три системы",sysHint:"Выбери одну или пройди всё",c1t:"Тело",c1p:"Сон, вода, питание, движение. Что телу реально нужно, чтобы работать чётко — и как это проверить, а не гадать.",c2t:"Психика",c2p:"Как работает твоя голова: откуда тревога и апатия, как понять своё состояние. Короткий тест-квадрант.",c3t:"Мир",c3p:"Как отличать правду от манипуляции и не дать себя обмануть. Проверь, легко ли тебя провести.",ctaT:"Пройти все три",ctaS:"Тело · Психика · Мир — ~10 минут",testCtaSub:"Новый тест · 1 минута",testCta:"В каком из 4 состояний ты живёшь?"},
+ ro:{home:"Start",tag:"Corp · Psihic · Lume",hook:'În 5 minute vei înțelege <em>ce ai de făcut.</em>',frameQuote:'Toți vând suplimente, frică și speranță. <b>Noi îți dăm claritate.</b>',sysLabel:"Trei sisteme",sysHint:"Alege unul sau parcurge tot",c1t:"Corp",c1p:"Somn, apă, alimentație, mișcare. De ce are nevoie corpul ca să funcționeze bine — și cum verifici, nu ghicești.",c2t:"Psihic",c2p:"Cum funcționează mintea ta: de unde vin anxietatea și apatia, cum îți înțelegi starea. Un test-cadran scurt.",c3t:"Lume",c3p:"Cum deosebești adevărul de manipulare și nu te lași păcălit. Vezi cât de ușor poți fi indus în eroare.",ctaT:"Fă toate trei",ctaS:"Corp · Psihic · Lume — ~10 minute",testCtaSub:"Test nou · 1 minut",testCta:"În care din 4 stări trăiești?"},
+ en:{home:"Start",tag:"Body · Mind · World",hook:"In 5 minutes you'll know <em>what to do next.</em>",frameQuote:'Everyone sells supplements, fear and hope. <b>We give you clarity.</b>',sysLabel:"Three systems",sysHint:"Pick one or do all three",c1t:"Body",c1p:"Sleep, water, food, movement. What your body actually needs to run clean — and how to check it, not guess.",c2t:"Mind",c2p:"How your head works: where anxiety and flatness come from, how to read your own state. A short quadrant test.",c3t:"World",c3p:"How to tell truth from manipulation and not get played. See how easily you can be misled.",ctaT:"Do all three",ctaS:"Body · Mind · World — ~10 min",testCtaSub:"New test · 1 minute",testCta:"Which of the 4 states do you live in?"}
 };
 
 function applyTemplateLang(l){const tt=I18N[l];if(!tt)return;document.documentElement.lang=l;document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(tt[k]!==undefined){if(k==='hook'||k==='frameQuote'){el.innerHTML=tt[k];}else{el.textContent=tt[k];}}});}
