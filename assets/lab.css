@@ -280,7 +280,12 @@ section.tight { padding: clamp(40px, 8vw, 72px) 0; }
 
 /* -------- 2 колонки (интро основателя, «сейчас/обычно») -------- */
 .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
-@media (max-width: 800px) { .cols2 { grid-template-columns: 1fr; } .cols2.rev > *:first-child { order: 2; } }
+@media (max-width: 800px) {
+  .cols2 { grid-template-columns: 1fr; }
+  .cols2.rev > *:first-child { order: 2; }
+  /* на мобиле портрет основателя не должен занимать весь экран */
+  .cols2 .photo { max-width: 230px; }
+}
 
 .lead {
   font-family: var(--display); font-weight: 500; font-size: clamp(19px, 3vw, 23px);
