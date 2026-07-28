@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Твой отчёт | HealthyWolf</title>
+<title>Your report | HealthyWolf</title>
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#F4F1EA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 <body data-page="result">
 <header class="nav">
   <div class="nav__in">
-    <a class="brand" href="/" aria-label="HealthyWolf — на главную">
+    <a class="brand" href="/en/" aria-label="HealthyWolf — home">
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
         <path d="M9 8 L18 19 L24 15 L30 19 L39 8 L36 23 L32 32 L24 41 L16 32 L12 23 Z"/>
         <path d="M17 24 L21.5 26"/><path d="M31 24 L26.5 26"/><path d="M21 34 L24 37 L27 34"/>
@@ -25,8 +25,8 @@
       <span class="brand__name">Healthy<b>Wolf</b></span>
     </a>
     <span class="lang">
-      <a href="/test/result/" aria-current="true">RU</a>
-      <a href="/en/test/result/">EN</a>
+      <a href="/test/result/">RU</a>
+      <a href="/en/test/result/" aria-current="true">EN</a>
     </span>
   </div>
 </header>
@@ -42,20 +42,20 @@
       <div class="result__form" id="r-form"></div>
       <p class="result__gist" id="r-gist"></p>
 
-      <!-- РИС. 01 — ЛЕСТНИЦА -->
+      <!-- FIG. 01 — LADDER -->
       <div style="margin-top:44px">
         <div class="fig-label" id="r-fig1"></div>
         <div class="ladder" id="r-ladder"></div>
         <p class="muted" id="r-laddernote" style="margin-top:14px;font-size:14px"></p>
       </div>
 
-      <!-- РИС. 02 — КВАДРАНТ -->
+      <!-- FIG. 02 — QUADRANT -->
       <div style="margin-top:44px">
         <div class="fig-label" id="r-fig2"></div>
         <div class="quad" style="max-width:420px">
           <div class="quad__head">
-            <span class="mono sm">Твоя точка</span>
-            <span class="mono sm">PANAS · обычно</span>
+            <span class="mono sm">Your point</span>
+            <span class="mono sm">PANAS · usually</span>
           </div>
           <div class="quad__plotwrap">
             <span class="quad__axis-y" id="r-axisy"></span>
@@ -65,10 +65,10 @@
                 <line x1="50" y1="0" x2="50" y2="100" stroke="#C7C1B2" stroke-width="0.5"/>
                 <line x1="0" y1="50" x2="100" y2="50" stroke="#C7C1B2" stroke-width="0.5"/>
               </svg>
-              <div class="quad__label tl">Тревога</div>
-              <div class="quad__label tr">Стресс</div>
-              <div class="quad__label bl">Апатия</div>
-              <div class="quad__label br">Энергия</div>
+              <div class="quad__label tl">Anxiety</div>
+              <div class="quad__label tr">Stress</div>
+              <div class="quad__label bl">Apathy</div>
+              <div class="quad__label br">Energy</div>
               <span class="quad__pt" id="r-quadpt" style="left:50%;bottom:50%"></span>
             </div>
             <span class="quad__axis-x" id="r-axisx"></span>
@@ -76,14 +76,14 @@
         </div>
       </div>
 
-      <!-- ТАБЛИЦА 01 — БАЛЛЫ -->
+      <!-- TABLE 01 — SCORES -->
       <div style="margin-top:44px">
         <div class="fig-label" id="r-tab1"></div>
         <table class="scoretable" id="r-scoretable"></table>
         <p class="scoretable__note" id="r-tablenote"></p>
       </div>
 
-      <!-- РАЗБОР A–D за email-гейтом -->
+      <!-- BREAKDOWN A–D behind email gate -->
       <div style="margin-top:52px">
         <div class="gate" id="r-gate">
           <span class="stamp gate__lockbadge" id="r-gatelocked"></span>
@@ -135,10 +135,10 @@
 
 <footer class="footer">
   <div class="wrap footer__in">
-    <div class="footer__brand">HealthyWolf · Тело · Психика · Мир</div>
+    <div class="footer__brand">HealthyWolf · Body · Mind · World</div>
     <div class="footer__legal">
-      <a href="/privacy/">Политика конфиденциальности</a>
-      <a href="/terms/">Условия использования</a>
+      <a href="/en/privacy/">Privacy Policy</a>
+      <a href="/en/terms/">Terms of Use</a>
     </div>
   </div>
 </footer>

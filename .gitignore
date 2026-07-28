@@ -9,3 +9,8 @@ main.py
 probe_*
 *.png
 !wolf.png
+# картинки сайта должны попадать в деплой (GitHub Pages)
+!assets/*.png
+_seed.html
+_probe.html
+_og.html
