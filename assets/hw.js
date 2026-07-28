@@ -455,6 +455,9 @@
      АВТО-ИНИТ по data-page + общие мелочи
      ====================================================================== */
   function boot() {
+    // запоминаем язык текущей страницы (для языкового редиректа на корне)
+    try { localStorage.setItem("hw_lang", document.documentElement.lang === "en" ? "en" : "ru"); } catch (e) {}
+
     // fade-up при скролле
     var io;
     if ("IntersectionObserver" in window) {

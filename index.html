@@ -3,12 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Язык по умолчанию — английский. Новый посетитель корня → /en/.
+   RU остаётся доступным: выбор языка запоминается в localStorage (hw_lang). */
+(function(){try{
+  var q=new URLSearchParams(location.search).get('lang');
+  if(q==='ru'||q==='en')localStorage.setItem('hw_lang',q);
+  var pref=localStorage.getItem('hw_lang');
+  if(pref==='ru'){ if(location.search) history.replaceState({},'','/'); return; }
+  location.replace('/en/');
+}catch(e){ location.replace('/en/'); }})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/en/"></noscript>
 <title>HealthyWolf — тело, психика, мир. Тест состояния за 1 минуту</title>
 <meta name="description" content="Спишь по 8 часов и всё равно выжат? Бесплатный тест на основе PANAS за 1 минуту покажет, в каком из 4 состояний застрял твой организм — Энергия, Стресс, Тревога или Апатия — и что с этим делать.">
 <link rel="canonical" href="https://myhealthywolf.com/">
 <link rel="alternate" hreflang="ru" href="https://myhealthywolf.com/">
 <link rel="alternate" hreflang="en" href="https://myhealthywolf.com/en/">
-<link rel="alternate" hreflang="x-default" href="https://myhealthywolf.com/">
+<link rel="alternate" hreflang="x-default" href="https://myhealthywolf.com/en/">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HealthyWolf">
