@@ -162,6 +162,13 @@ section.tight { padding: clamp(40px, 8vw, 72px) 0; }
 .btn--sm { padding: 11px 18px; font-size: 12px; }
 .btn--block { display: flex; width: 100%; justify-content: center; }
 
+/* на мобиле основные CTA — на всю ширину (отступы 20px даёт .wrap) */
+@media (max-width: 480px) {
+  .btn:not(.btn--sm) { width: 100%; justify-content: center; }
+  .hero__cta { width: 100%; }
+  .result__actions { flex-direction: column; }
+}
+
 /* текст-ссылка со стрелкой */
 .tlink {
   font-family: var(--mono);
@@ -186,7 +193,7 @@ section.tight { padding: clamp(40px, 8vw, 72px) 0; }
 }
 .nav__in { max-width: var(--maxw); margin: 0 auto; padding: 12px var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-.brand svg { width: 30px; height: 30px; display: block; }
+.brand__ico { height: 28px; width: auto; display: block; }
 .brand__name { font-family: var(--display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; }
 .brand__name b { font-weight: 600; }
 
@@ -283,8 +290,8 @@ section.tight { padding: clamp(40px, 8vw, 72px) 0; }
 @media (max-width: 800px) {
   .cols2 { grid-template-columns: 1fr; }
   .cols2.rev > *:first-child { order: 2; }
-  /* на мобиле портрет основателя не должен занимать весь экран */
-  .cols2 .photo { max-width: 230px; }
+  /* на мобиле портрет основателя компактный и по центру колонки */
+  .cols2 .photo { max-width: 280px; }
 }
 
 .lead {
@@ -292,10 +299,10 @@ section.tight { padding: clamp(40px, 8vw, 72px) 0; }
   line-height: 1.3; color: var(--ink); margin: 0 0 18px; max-width: 26ch;
 }
 
-/* фото в рамке (разрешённая «коробка») */
-.photo { border: 1px solid var(--ink); border-radius: var(--radius); overflow: hidden; background: var(--paper-2); }
-.photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 12%; }
-.photo__cap { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); padding: 10px 12px; border-top: 1px solid var(--line); }
+/* фото в рамке (разрешённая «коробка») — портрет «голова и плечи» */
+.photo { border: 1px solid var(--ink); border-radius: var(--radius); overflow: hidden; background: var(--paper-2); max-width: 360px; margin-inline: auto; }
+.photo img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 15%; display: block; }
+.photo__cap { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); padding: 10px 12px; border-top: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* -------- слот под видео -------- */
 .videoslot {
