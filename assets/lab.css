@@ -454,44 +454,20 @@ section.tight { padding: clamp(40px, 8vw, 72px) 0; }
 .compare .cell .v { font-family: var(--display); font-weight: 700; font-size: 30px; margin-top: 6px; }
 @media (max-width: 600px) { .compare { grid-template-columns: 1fr 1fr; } }
 
-/* email-гейт */
+/* email-гейт: размытый тизер разбора + CTA-карточка со ссылкой на форму */
 .gate { position: relative; }
 .gate__locked { filter: blur(7px); pointer-events: none; user-select: none; }
-.gate.open .gate__locked { filter: none; pointer-events: auto; user-select: auto; }
 .gate__lockbadge { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 3; }
-.gate.open .gate__lockbadge { display: none; }
 .gate__card {
   position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
   width: min(460px, 92%); z-index: 4; background: var(--paper);
   border: 1px solid var(--ink); border-radius: var(--radius); padding: 26px 24px; text-align: center;
   box-shadow: 0 20px 50px rgba(22,21,15,.14);
 }
-.gate.open .gate__card { display: none; }
-.gate__card h3 { font-family: var(--display); font-weight: 600; font-size: 21px; margin-bottom: 8px; }
-.gate__card p { color: var(--ink-2); font-size: 14px; margin-bottom: 18px; max-width: none; }
-.gate__form { display: flex; flex-direction: column; gap: 10px; }
-.gate__form input[type=email] {
-  font-family: var(--mono); font-size: 14px; padding: 14px 14px; border: 1px solid var(--line-2);
-  border-radius: var(--radius); background: var(--paper); color: var(--ink); width: 100%;
-}
-.gate__form input[type=email]:focus { outline: none; border-color: var(--accent); }
-.gate__ok { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-top: 8px; min-height: 14px; }
-.gate__err { color: var(--accent); }
-
-.gate__done { display: none; text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius); padding: 14px; margin-bottom: 26px; }
-.gate.open .gate__done { display: block; }
-
-/* Встроенная форма systeme.io внутри карточки гейта */
-.gate__embed { display: block; }
-.gate__embed-title { font-size: 12px; line-height: 1.45; letter-spacing: 0.12em; color: var(--ink); margin-bottom: 16px; }
-.gate__embed-frame { display: block; width: 100%; height: 420px; border: none; border-radius: 4px; background: var(--paper); overflow: hidden; }
-.gate__embed-legal { font-size: 9.5px; line-height: 1.5; letter-spacing: 0.05em; text-transform: none; color: var(--ink-2); margin: 12px 0 0; }
-.gate__embed-legal a { color: var(--ink-2); text-decoration: underline; }
-.gate__embed-legal a:hover { color: var(--ink); }
-.gate__embed-unlock { margin-top: 16px; }
-@media (max-width: 460px) {
-  .gate__embed-frame { height: 440px; }
-}
+.gate__title { font-size: 12px; line-height: 1.45; letter-spacing: 0.12em; color: var(--ink); margin-bottom: 16px; }
+.gate__legal { font-size: 9.5px; line-height: 1.5; letter-spacing: 0.05em; text-transform: none; color: var(--ink-2); margin: 12px 0 0; }
+.gate__legal a { color: var(--ink-2); text-decoration: underline; }
+.gate__legal a:hover { color: var(--ink); }
 
 .result__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
 

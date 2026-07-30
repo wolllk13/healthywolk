@@ -11,21 +11,14 @@
     LS_RESULT: "hw_test_result",
     MIN: 6, MAX: 30, THRESHOLD: 18,
 
-    // Приёмник лида (Google Apps Script web app). Пусто = отправка выключена,
-    // почта только пишется в localStorage (как раньше). Вставь сюда /exec-URL
-    // после деплоя скрипта из tools/telegram-relay.gs — и лиды полетят в Telegram.
-    // Используется только запасной нативной формой (типы без systeme.io URL ниже).
-    RELAY_URL: "",
-
-    // Формы-страницы systeme.io по типу состояния (встраиваются как iframe).
-    // Почту принимает и хранит сам systeme.io — свой бэкенд не нужен.
-    // Пусто у типа = URL ещё не задан → показываем запасную нативную форму,
-    // чтобы лиды этого типа не уходили в чужой сегмент. Просто вставь URL.
-    FORMS: {
-      energy:  "https://janopolrian.systeme.io/a946457c",
-      stress:  "https://janopolrian.systeme.io/a946457c-98503d98-45a297b0",
-      anxiety: "https://janopolrian.systeme.io/a946457c-09aacae7",
-      apathy:  "https://janopolrian.systeme.io/a946457c-98503d98",
+    // Страница подписки systeme.io по типу состояния. Кнопка на экране
+    // результата ведёт человека сюда (та же вкладка); почту принимает и
+    // хранит systeme.io. Ключей/бэкенда на сайте нет — только эти ссылки.
+    PLAN_LINKS: {
+      energy:  "https://janopolrian.systeme.io/energy",
+      stress:  "https://janopolrian.systeme.io/stress",
+      anxiety: "https://janopolrian.systeme.io/anxiety",
+      apathy:  "https://janopolrian.systeme.io/apathy",
     },
 
     // 6 позитивных + 6 негативных пунктов PANAS
@@ -78,15 +71,9 @@
         headC: "Три конкретных шага",
         headD: "Сейчас и обычно",
         dBody: "Твой тип определяется по слою «обычно» — это устойчивая база за последние две недели. «Сейчас» — срез сегодняшнего дня. Если они расходятся, это нормально: один тяжёлый день не меняет тип. Спад в «сейчас» — сигнал восстановиться, а не диагноз.",
-        gateTitle: "Полный разбор + план на 7 дней",
-        gateSub: "Что твой тип значит, главная ловушка, три шага и план на неделю — отправлю на почту.",
-        gateEmail: "твоя почта", gateBtn: "Открыть полный разбор",
         gateLocked: "ЗАКРЫТО",
-        gateOk: "Готово — полный разбор открыт ниже.",
-        gateErr: "Проверь адрес — кажется, опечатка.",
-        gateFormTitle: "ПОЛНЫЙ РАЗБОР + ПЛАН НА 7 ДНЕЙ — НА ПОЧТУ",
-        gateUnlock: "Я оставил почту — открыть разбор",
-        gateLegal: 'Нажимая кнопку в форме, ты соглашаешься с <a href="/privacy/">Политикой конфиденциальности</a>',
+        gateTitle: "ПОЛНЫЙ РАЗБОР + ПЛАН НА 7 ДНЕЙ — НА ПОЧТУ",
+        gateLegal: 'Нажимая кнопку, ты соглашаешься с <a href="/privacy/">Политикой конфиденциальности</a>',
         share: "ПОДЕЛИТЬСЯ РЕЗУЛЬТАТОМ", shareCopied: "ССЫЛКА СКОПИРОВАНА",
         retake: "ПРОЙТИ ЗАНОВО",
         shareText: "Моё состояние по тесту HealthyWolf — {t}. Проверь своё:",
@@ -114,15 +101,9 @@
         headC: "Three concrete steps",
         headD: "Now and usually",
         dBody: "Your type is set by the 'usually' layer — your stable baseline over the past two weeks. 'Now' is a snapshot of today. If they differ, that's fine: one hard day doesn't change your type. A dip in 'now' is a cue to recover, not a diagnosis.",
-        gateTitle: "Full breakdown + 7-day plan",
-        gateSub: "What your type means, the main trap, three steps and a week's plan — I'll send it to your email.",
-        gateEmail: "your email", gateBtn: "Open the full breakdown",
         gateLocked: "LOCKED",
-        gateOk: "Done — the full breakdown is open below.",
-        gateErr: "Check the address — looks like a typo.",
-        gateFormTitle: "FULL BREAKDOWN + 7-DAY PLAN — TO YOUR INBOX",
-        gateUnlock: "I left my email — open my breakdown",
-        gateLegal: 'By submitting the form you agree to the <a href="/en/privacy/">Privacy Policy</a>',
+        gateTitle: "FULL BREAKDOWN + 7-DAY PLAN — TO YOUR INBOX",
+        gateLegal: 'By continuing you agree to the <a href="/en/privacy/">Privacy Policy</a>',
         share: "SHARE RESULT", shareCopied: "LINK COPIED",
         retake: "TAKE AGAIN",
         shareText: "My state on the HealthyWolf test — {t}. Check yours:",
@@ -245,30 +226,10 @@
       return "apathy";
     },
     pct: function (v) { return Math.max(0, Math.min(100, Math.round(((v - this.MIN) / (this.MAX - this.MIN)) * 100))); },
-    isEmail: function (s) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((s || "").trim()); },
     esc: function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); },
 
     save: function (o) { try { localStorage.setItem(this.LS_RESULT, JSON.stringify(o)); } catch (e) {} },
     load: function () { try { return JSON.parse(localStorage.getItem(this.LS_RESULT) || "null"); } catch (e) { return null; } },
-
-    // Отправка лида на посредник (Apps Script → Telegram). Фоново, тихо.
-    // sendBeacon шлёт как text/plain — «простой» запрос, без CORS-preflight;
-    // доходит, даже если пользователь сразу уходит со страницы.
-    sendLead: function (lead) {
-      if (!this.RELAY_URL) return; // не настроено — молча выходим
-      var body = JSON.stringify(lead);
-      try {
-        if (navigator.sendBeacon) {
-          navigator.sendBeacon(this.RELAY_URL, new Blob([body], { type: "text/plain;charset=UTF-8" }));
-          return;
-        }
-      } catch (e) {}
-      // Фолбэк для старых браузеров без sendBeacon.
-      try {
-        fetch(this.RELAY_URL, { method: "POST", mode: "no-cors", keepalive: true,
-          headers: { "Content-Type": "text/plain;charset=UTF-8" }, body: body });
-      } catch (e2) {}
-    },
   };
 
   window.HW = HW;
@@ -435,118 +396,21 @@
       '<div class="cell"><div class="k">' + t.colNow + '</div><div class="v">' + r.paNow + " / " + r.naNow + '</div><div class="k" style="margin-top:6px">' + t.colFuel + " / " + t.colTension + '</div></div>' +
       '<div class="cell"><div class="k">' + t.colUsual + '</div><div class="v">' + r.paUsual + " / " + r.naUsual + '</div><div class="k" style="margin-top:6px">' + t.colFuel + " / " + t.colTension + '</div></div>');
 
-    /* ---- EMAIL-ГЕЙТ ---- */
+    /* ---- CTA-ГЕЙТ: ссылка на страницу подписки systeme.io ----
+       Кнопка уводит человека на форму его типа (та же вкладка). Полный
+       разбор + план приходят на почту после подписки там. Разбор A–D на
+       странице остаётся размытым тизером того, что придёт. */
     set("r-gatelocked", "[ " + t.gateLocked + " ]");
-    var gate = $("r-gate");
-    var doneEl = $("r-gatedone");
-    if (doneEl) doneEl.textContent = t.gateOk;
+    set("r-gatetitle", t.gateTitle);
 
-    // Раскрытие разбора: снимает блюр, прячет карточку/замок, показывает doneEl.
-    function unlockGate() { gate.classList.add("open"); }
-
-    var formUrl = HW.FORMS[type];
-
-    if (formUrl) {
-      /* ===== ВАРИАНТ А — форма systeme.io во фрейме =====
-         Почту принимает systeme.io. Submit кросс-доменного iframe напрямую
-         не поймать, поэтому раскрываем разбор по ручной кнопке (см. ниже). */
-      var titleEl = $("r-gatetitle");
-      var subEl = $("r-gatesub");
-      var nativeForm = $("r-gateform");
-      var okBox = $("r-gateok");
-      var card = nativeForm ? nativeForm.parentNode : (titleEl ? titleEl.parentNode : null);
-
-      if (titleEl) { titleEl.textContent = t.gateFormTitle; titleEl.className = "gate__embed-title mono"; }
-      if (subEl) subEl.style.display = "none";       // контекст даёт сам заголовок формы
-      if (nativeForm) nativeForm.style.display = "none";
-      if (okBox) okBox.style.display = "none";
-
-      var embed = document.createElement("div");
-      embed.className = "gate__embed";
-
-      var iframe = document.createElement("iframe");
-      iframe.className = "gate__embed-frame";
-      iframe.src = formUrl;
-      iframe.title = t.gateFormTitle;
-      iframe.setAttribute("scrolling", "no");
-      iframe.setAttribute("loading", "lazy");
-
-      var legal = document.createElement("p");
-      legal.className = "gate__embed-legal mono";
-      legal.innerHTML = t.gateLegal;
-
-      var unlockBtn = document.createElement("button");
-      unlockBtn.type = "button";
-      unlockBtn.className = "btn btn--sm btn--block gate__embed-unlock";
-      unlockBtn.textContent = t.gateUnlock;
-      unlockBtn.hidden = true;
-
-      embed.appendChild(iframe);
-      embed.appendChild(legal);
-      embed.appendChild(unlockBtn);
-      if (card) card.appendChild(embed);
-
-      var revealed = false;
-      unlockBtn.addEventListener("click", function () {
-        if (revealed) return; revealed = true;
-        unlockGate();
-      });
-      function showUnlock() { if (!revealed) unlockBtn.hidden = false; }
-
-      // Fallback: показать кнопку через 25с после загрузки — даже если
-      // взаимодействие с формой не задетектилось.
-      setTimeout(showUnlock, 25000);
-
-      // Детект взаимодействия: клик в кросс-доменный iframe уводит фокус окна,
-      // и document.activeElement становится этим iframe. Тогда через ~5с — кнопка.
-      var interacted = false;
-      window.addEventListener("blur", function () {
-        setTimeout(function () {
-          if (interacted) return;
-          if (document.activeElement === iframe) {
-            interacted = true;
-            setTimeout(showUnlock, 5000);
-          }
-        }, 0);
-      });
-
-    } else {
-      /* ===== ВАРИАНТ Б (запасной) — нативная форма =====
-         Пока у типа нет URL systeme.io. Ведёт себя как раньше: локальная
-         запись лида + опциональный пинг в Telegram (если задан RELAY_URL). */
-      set("r-gatetitle", t.gateTitle);
-      set("r-gatesub", t.gateSub);
-      var form = $("r-gateform");
-      var emailInput = $("r-email");
-      var okMsg = $("r-gateok");
-      if (emailInput) emailInput.placeholder = t.gateEmail;
-      var gateBtn = $("r-gatebtn");
-      if (gateBtn) gateBtn.textContent = t.gateBtn;
-
-      if (form) {
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          var val = emailInput.value;
-          if (!HW.isEmail(val)) {
-            okMsg.textContent = t.gateErr; okMsg.classList.add("gate__err");
-            emailInput.focus(); return;
-          }
-          var lead = {
-            email: val.trim(), type: type,
-            lang: document.documentElement.lang === "en" ? "en" : "ru",
-            ts: new Date().toISOString(),
-          };
-          try {
-            var leads = JSON.parse(localStorage.getItem("hw_leads") || "[]");
-            leads.push(lead);
-            localStorage.setItem("hw_leads", JSON.stringify(leads));
-          } catch (e2) {}
-          HW.sendLead(lead);
-          okMsg.textContent = "";
-          unlockGate();
-        });
-      }
+    var planLink = $("r-gatelink");
+    if (planLink) {
+      planLink.href = HW.PLAN_LINKS[type];   // type ∈ {energy,stress,anxiety,apathy}, всегда валиден
+      planLink.textContent = "SEND ME THE PLAN";
     }
+
+    var legalEl = $("r-gatelegal");
+    if (legalEl) legalEl.innerHTML = t.gateLegal;
 
     /* ---- КНОПКИ ---- */
     var shareBtn = $("r-share"), retakeBtn = $("r-retake");
