@@ -24,8 +24,8 @@
     FORMS: {
       energy:  "https://janopolrian.systeme.io/a946457c",
       stress:  "https://janopolrian.systeme.io/a946457c-98503d98-45a297b0",
-      anxiety: "", // TODO: вставь URL формы systeme.io для типа ANXIETY (тревога)
-      apathy:  "", // TODO: вставь URL формы systeme.io для типа APATHY (апатия)
+      anxiety: "https://janopolrian.systeme.io/a946457c-09aacae7",
+      apathy:  "https://janopolrian.systeme.io/a946457c-98503d98",
     },
 
     // 6 позитивных + 6 негативных пунктов PANAS
