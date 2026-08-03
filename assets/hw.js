@@ -21,6 +21,9 @@
       apathy:  "https://janopolrian.systeme.io/apathy",
     },
 
+    // Вторичный CTA: страница заявки в founding-группу (одна на все типы/языки).
+    APPLY_LINK: "https://janopolrian.systeme.io/apply",
+
     // 6 позитивных + 6 негативных пунктов PANAS
     positive: ["interested", "energetic", "inspired", "determined", "attentive", "active"],
     negative: ["tense", "anxious", "irritable", "downcast", "restless", "drained"],
@@ -74,6 +77,7 @@
         gateLocked: "ЗАКРЫТО",
         gateTitle: "ПОЛНЫЙ РАЗБОР + ПЛАН НА 7 ДНЕЙ — НА ПОЧТУ",
         gateLegal: 'Нажимая кнопку, ты соглашаешься с <a href="/privacy/">Политикой конфиденциальности</a>',
+        applyCta: "Already know you want in? Apply for the founding group →",
         share: "ПОДЕЛИТЬСЯ РЕЗУЛЬТАТОМ", shareCopied: "ССЫЛКА СКОПИРОВАНА",
         retake: "ПРОЙТИ ЗАНОВО",
         shareText: "Моё состояние по тесту HealthyWolf — {t}. Проверь своё:",
@@ -104,6 +108,7 @@
         gateLocked: "LOCKED",
         gateTitle: "FULL BREAKDOWN + 7-DAY PLAN — TO YOUR INBOX",
         gateLegal: 'By continuing you agree to the <a href="/en/privacy/">Privacy Policy</a>',
+        applyCta: "Already know you want in? Apply for the founding group →",
         share: "SHARE RESULT", shareCopied: "LINK COPIED",
         retake: "TAKE AGAIN",
         shareText: "My state on the HealthyWolf test — {t}. Check yours:",
@@ -411,6 +416,13 @@
 
     var legalEl = $("r-gatelegal");
     if (legalEl) legalEl.innerHTML = t.gateLegal;
+
+    // Вторичный CTA — заявка в founding-группу (не конкурирует с главной кнопкой).
+    var applyEl = $("r-applylink");
+    if (applyEl) {
+      applyEl.href = HW.APPLY_LINK;
+      applyEl.textContent = t.applyCta;
+    }
 
     /* ---- КНОПКИ ---- */
     var shareBtn = $("r-share"), retakeBtn = $("r-retake");
