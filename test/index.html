@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Безопасность: CSP по хэшам inline-скриптов. Добавляешь аналитику —
+       впиши её домен в script-src/connect-src и хэш её inline-кода. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-riitXBKGtl5y5ccA7GF6ccqJuwEVP5tm8j0ff/fbw9U=' 'sha256-bcwdCZI+Z83jej94TI3LN1e1GLMgAliA8npWfjq/yOk='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Тест состояния — в каком из 4 ты живёшь? | HealthyWolf</title>
 <meta name="description" content="24 вопроса, около 1 минуты. Бесплатный тест на основе PANAS определит твой тип — Энергия, Стресс, Тревога или Апатия — по осям сил и напряжения.">
 <link rel="canonical" href="https://myhealthywolf.com/test/">
