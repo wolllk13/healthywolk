@@ -75,9 +75,10 @@
         headD: "Сейчас и обычно",
         dBody: "Твой тип определяется по слою «обычно» — это устойчивая база за последние две недели. «Сейчас» — срез сегодняшнего дня. Если они расходятся, это нормально: один тяжёлый день не меняет тип. Спад в «сейчас» — сигнал восстановиться, а не диагноз.",
         gateLocked: "ЗАКРЫТО",
-        gateTitle: "ПОЛНЫЙ РАЗБОР + ПЛАН НА 7 ДНЕЙ — НА ПОЧТУ",
+        gateTitle: "Your results are ready. Where should I send them?",
+        gateSub: "Full breakdown + your 7-day plan.",
         gateLegal: 'Нажимая кнопку, ты соглашаешься с <a href="/privacy/">Политикой конфиденциальности</a>',
-        applyCta: "Already know you want in? Apply for the founding group →",
+        applyCta: "Already know you want to work on this? Book a free diagnostic session →",
         share: "ПОДЕЛИТЬСЯ РЕЗУЛЬТАТОМ", shareCopied: "ССЫЛКА СКОПИРОВАНА",
         retake: "ПРОЙТИ ЗАНОВО",
         shareText: "Моё состояние по тесту HealthyWolf — {t}. Проверь своё:",
@@ -106,9 +107,10 @@
         headD: "Now and usually",
         dBody: "Your type is set by the 'usually' layer — your stable baseline over the past two weeks. 'Now' is a snapshot of today. If they differ, that's fine: one hard day doesn't change your type. A dip in 'now' is a cue to recover, not a diagnosis.",
         gateLocked: "LOCKED",
-        gateTitle: "FULL BREAKDOWN + 7-DAY PLAN — TO YOUR INBOX",
+        gateTitle: "Your results are ready. Where should I send them?",
+        gateSub: "Full breakdown + your 7-day plan.",
         gateLegal: 'By continuing you agree to the <a href="/en/privacy/">Privacy Policy</a>',
-        applyCta: "Already know you want in? Apply for the founding group →",
+        applyCta: "Already know you want to work on this? Book a free diagnostic session →",
         share: "SHARE RESULT", shareCopied: "LINK COPIED",
         retake: "TAKE AGAIN",
         shareText: "My state on the HealthyWolf test — {t}. Check yours:",
@@ -407,11 +409,12 @@
        странице остаётся размытым тизером того, что придёт. */
     set("r-gatelocked", "[ " + t.gateLocked + " ]");
     set("r-gatetitle", t.gateTitle);
+    set("r-gatesub", t.gateSub);
 
     var planLink = $("r-gatelink");
     if (planLink) {
       planLink.href = HW.PLAN_LINKS[type];   // type ∈ {energy,stress,anxiety,apathy}, всегда валиден
-      planLink.textContent = "SEND ME THE PLAN";
+      planLink.textContent = "SEND ME MY RESULTS";
     }
 
     var legalEl = $("r-gatelegal");
